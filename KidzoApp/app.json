@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "KidzoApp",
+    "slug": "KidzoApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "KidzoApp"
+}
