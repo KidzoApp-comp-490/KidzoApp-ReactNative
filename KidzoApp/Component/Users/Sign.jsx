@@ -11,63 +11,60 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import Back from "../../assets/SignIn2.png";
-import PassIcon from "../../assets/Frame.png";
-import EmailIcon from "../../assets/mdi_email-alert.png";
-import GoogIcon from "../../assets/logos_google-icon.png";
+import Back from "../../assets/SignIn/SignIn2.png";
+import PassIcon from "../../assets/SignIn/Frame.png";
+import EmailIcon from "../../assets/SignIn/mdi_email-alert.png";
+import GoogIcon from "../../assets/SignIn/logos_google-icon.png";
 
 export default function SingIn() {
   return (
     <ImageBackground source={Back} resizeMode="cover" style={styles.image}>
-        <View style={styles.body}>
-          <View style={styles.signUpTextView}>
-            <Text style={styles.signUpText}>
-              Sign in{"\n"}
-              <Text style={styles.accountText}>Welcome back</Text>
-            </Text>
-          </View>
-          <View style={styles.emailView}>
-            <Text style={styles.email}>E-mail</Text>
-            <View style={styles.emailInpView}>
-              <Image source={EmailIcon} style={styles.emailIcon} />
-              <TextInput style={styles.emailInp} />
-            </View>
-          </View>
-          <View style={styles.passView}>
-            <Text style={styles.pass}>Password</Text>
-            <View style={styles.passInpView}>
-              <Image source={PassIcon} style={styles.passIcon} />
-              <TextInput style={styles.passInp} secureTextEntry />
-            </View>
-          </View>
-          <Text style={styles.forgot}>Forgot Password?</Text>
+      <View style={styles.body}>
+        <View style={styles.signUpTextView}>
+          <Text style={styles.signUpText}>
+            Sign in{"\n"}
+            <Text style={styles.accountText}>Welcome back</Text>
+          </Text>
         </View>
+        <View style={styles.emailView}>
+          <Text style={styles.email}>E-mail</Text>
+          <View style={styles.emailInpView}>
+            <Image source={EmailIcon} style={styles.emailIcon} />
+            <TextInput style={styles.emailInp} />
+          </View>
+        </View>
+        <View style={styles.passView}>
+          <Text style={styles.pass}>Password</Text>
+          <View style={styles.passInpView}>
+            <Image source={PassIcon} style={styles.passIcon} />
+            <TextInput style={styles.passInp} secureTextEntry />
+          </View>
+        </View>
+        <Text style={styles.forgot}>Forgot Password?</Text>
+      </View>
 
-        
-        <TouchableOpacity style={styles.touchbutton}>
-          
-
-       <View style={styles.buttoncontainer}>
+      <TouchableOpacity style={styles.touchbutton}>
+        <View style={styles.buttoncontainer}>
           <Button title="Sign in" color="#9374B7" />
         </View>
-        </TouchableOpacity>
-        <Text style={styles.line1}>or</Text>
-        
-         <Text style={styles.line}>                                                                  </Text> 
-       
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.goog}>Sign in with Google</Text>
-        </TouchableOpacity>
-        <Image source={GoogIcon} style={styles.googicon} />
+      </TouchableOpacity>
+      <Text style={styles.line1}>or</Text>
 
-        <Text style={styles.accountcreate}>
-          Don't have an account? <Text style={styles.uptext}>Sign up</Text>
-        </Text>
-        <View style={{padding:20}}>
+      <Text style={styles.line}>
+        {
+          "                                                                           "
+        }
+      </Text>
 
-        </View>
-        
-      
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.goog}>Sign in with Google</Text>
+      </TouchableOpacity>
+      <Image source={GoogIcon} style={styles.googicon} />
+
+      <Text style={styles.accountcreate}>
+        Don't have an account? <Text style={styles.uptext}>Sign up</Text>
+      </Text>
+      <View style={{ padding: 20 }}></View>
     </ImageBackground>
   );
 }
@@ -102,13 +99,13 @@ const styles = StyleSheet.create({
     hight: "100%",
     marginLeft: 5,
   },
-  touchbutton:{
+  touchbutton: {
     marginTop: 70,
     borderRadius: 5,
     width: "80%",
     hight: "100%",
     marginLeft: 5,
-    color:"#9374B7",
+    color: "#9374B7",
   },
   input: {
     borderWidth: 1,
@@ -135,14 +132,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: "#9374B7",
     opacity: 0.5,
-    
   },
 
   line: {
     textDecorationLine: "underline",
     color: "red",
     marginTop: -15,
-  
   },
 
   inputpass: {
