@@ -22,7 +22,8 @@ import Day from "../../assets/SignUp/day.png";
 import Month from "../../assets/SignUp/month.png";
 import Year from "../../assets/SignUp/year.png";
 import Google from "../../assets/SignUp/logos_google-icon.png";
-export default function SingUp() {
+
+export default function SingUp({ navigation }) {
   return (
     <ImageBackground source={Back} resizeMode="cover" style={styles.background}>
       <ScrollView>

@@ -16,7 +16,7 @@ import PassIcon from "../../assets/SignIn/Frame.png";
 import EmailIcon from "../../assets/SignIn/mdi_email-alert.png";
 import GoogIcon from "../../assets/SignIn/logos_google-icon.png";
 
-export default function SingIn() {
+export default function SingIn({ navigation }) {
   return (
     <ImageBackground source={Back} resizeMode="cover" style={styles.image}>
       <View style={styles.body}>
@@ -56,7 +56,12 @@ export default function SingIn() {
         }
       </Text>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("SingUp");
+        }}
+      >
         <Text style={styles.goog}>Sign in with Google</Text>
       </TouchableOpacity>
       <Image source={GoogIcon} style={styles.googicon} />

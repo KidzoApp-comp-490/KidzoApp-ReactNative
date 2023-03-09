@@ -1,17 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import SingIn from "./Component/Users/Sign";
-import SingUp from "./Component/Users/SingUp"
+import SingIn from "./Components/Users/Sign";
+import SingUp from "./Components/Users/SingUp"
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 export default function App() {
+  const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-      
-    {/* <SingIn/> */}
-    <SingUp/>
-      
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator initialRouteName="SingIn">
+    <Stack.Screen name="SingIn" component={SingIn} />
+    <Stack.Screen name="SingUp" component={SingUp} />
+        </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
