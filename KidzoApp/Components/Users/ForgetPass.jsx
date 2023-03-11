@@ -16,53 +16,65 @@ import Back from "../../assets/SignUp/Back.png";
 import Frame1Icon from "../../assets/ForgetPass/mdi_email-alert.png";
 import BackIcon from "../../assets/Confirm/Frame.png";
 
-export default function forget() {
+export default function forget({ navigation }) {
   return (
-   
     <ImageBackground source={Back} resizeMode="cover" style={styles.background}>
-      <View style={styles.logoView}>
-        <Image source={Logo} style={styles.logo} />
-      </View>
-      
-      <View style={styles.body}>
-        <View style={styles.square}>
-          <View style={styles.BackView}>
-            <Image source={BackIcon} style={styles.BackIcon} />
-            <Text style={styles.BackText}>Back to sign in</Text>
-          </View>
-          <View style={styles.ForgotTextView}>
-            <Text style={styles.ForgotText}>
-              Forgot Password{"\n"}
-              <Text style={styles.ConfirmText}>Follow the steps</Text>
-            </Text>
-          </View>
-          <View style={styles.emailView}>
-            <Text style={styles.inpText}>E-mail</Text>
-            <View style={styles.inpView}>
-              <Image source={Frame1Icon} style={styles.frame1Icon} />
-              <TextInput style={styles.input} />
-            </View>
-            <View style={styles.ButtonView}>
-              <TouchableOpacity style={styles.ButtonViewTouch}>
-                <Text style={styles.ConfirmTextTouch}>Send code</Text>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.logoView}>
+          <Image source={Logo} style={styles.logo} />
+        </View>
+
+        <View style={styles.body}>
+          <View style={styles.square}>
+            <View style={styles.BackView}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("SingIn");
+                }}
+              >
+                <Image source={BackIcon} style={styles.backIcon} />
               </TouchableOpacity>
+              <Text style={styles.BackText}>Back to sign in</Text>
+            </View>
+            <View style={styles.ForgotTextView}>
+              <Text style={styles.ForgotText}>
+                Forgot Password{"\n"}
+                <Text style={styles.ConfirmText}>Follow the steps</Text>
+              </Text>
+            </View>
+            <View style={styles.emailView}>
+              <Text style={styles.inpText}>E-mail</Text>
+              <View style={styles.inpView}>
+                <Image source={Frame1Icon} style={styles.frame1Icon} />
+                <TextInput style={styles.input} />
+              </View>
+              <View style={styles.ButtonView}>
+                <TouchableOpacity
+                  style={styles.ButtonViewTouch}
+                  onPress={() => {
+                    navigation.navigate("Confirm");
+                  }}
+                >
+                  <Text style={styles.ConfirmTextTouch}>Send code</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
       <StatusBar style="auto" />
-     
     </ImageBackground>
-    
   );
 }
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
     width: "100%",
     height: "100%",
     justifyContent: "center",
-    alignItems: "center",
+  },
+  container: {
+    marginTop: 40,
+    marginBottom: 10,
   },
   logoView: {
     alignItems: "center",
@@ -79,12 +91,17 @@ const styles = StyleSheet.create({
   square: {
     backgroundColor: "rgba(255, 255, 255, 0.5)",
     width: "90%",
-    height: "65%",
+    paddingBottom: 50,
     borderRadius: 15,
   },
   BackView: {
     flexDirection: "row",
     margin: 15,
+  },
+  backIcon: {
+    width: 16,
+    height: 16,
+    marginLeft: 10,
   },
   BackText: {
     marginHorizontal: 10,
@@ -142,15 +159,16 @@ const styles = StyleSheet.create({
   ButtonView: {
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
-    height: "60%",
-    marginTop: -25,
+    // width: "100%",
+    // height: "100%",
   },
   ButtonViewTouch: {
     justifyContent: "center",
     alignItems: "center",
-    width: "88%",
-    height: "30%",
+    width: "90%",
+    // height: "40%",
+    marginTop: 40,
+    height: 45,
     backgroundColor: "#9374B7",
     borderRadius: 5,
     overflow: "hidden",

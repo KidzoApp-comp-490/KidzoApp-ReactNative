@@ -36,7 +36,13 @@ export default function SingUp({ navigation }) {
               <Text style={styles.signUpText}>
                 Sign Up{"\n"}
                 <Text style={styles.accountText}>Already have account? </Text>
-                <Text style={styles.signInText}>Sign In</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("SingIn");
+                  }}
+                >
+                  <Text style={styles.signInText}>Sign In</Text>
+                </TouchableOpacity>
               </Text>
             </View>
             <View style={styles.emailView}>

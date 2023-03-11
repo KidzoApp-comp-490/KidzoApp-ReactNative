@@ -40,14 +40,31 @@ export default function SingIn({ navigation }) {
             <TextInput style={styles.passInp} secureTextEntry />
           </View>
         </View>
-        <Text style={styles.forgot}>Forgot Password?</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("ForgetPass");
+          }}
+        >
+          <Text style={styles.forgot}>Forgot Password?</Text>
+        </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.touchbutton}>
+      {/* <TouchableOpacity style={styles.touchbutton}>
         <View style={styles.buttoncontainer}>
-          <Button title="Sign in" color="#9374B7" />
+          <Button
+            title="Sign in"
+            color="#9374B7"
+            onPress={() => {
+              navigation.navigate("SingUp");
+            }}
+          />
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <View style={styles.ButtonView}>
+        <TouchableOpacity style={styles.ButtonViewTouch}>
+          <Text style={styles.ConfirmTextTouch}>Sing In</Text>
+        </TouchableOpacity>
+      </View>
       <Text style={styles.line1}>or</Text>
 
       <Text style={styles.line}>
@@ -56,18 +73,19 @@ export default function SingIn({ navigation }) {
         }
       </Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate("SingUp");
-        }}
-      >
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.goog}>Sign in with Google</Text>
       </TouchableOpacity>
       <Image source={GoogIcon} style={styles.googicon} />
-
       <Text style={styles.accountcreate}>
-        Don't have an account? <Text style={styles.uptext}>Sign up</Text>
+        Don't have an account?{" "}
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("SingUp");
+          }}
+        >
+          <Text style={styles.uptext}>Sign up</Text>
+        </TouchableOpacity>
       </Text>
       <View style={{ padding: 20 }}></View>
     </ImageBackground>
@@ -75,12 +93,11 @@ export default function SingIn({ navigation }) {
 }
 const styles = StyleSheet.create({
   image: {
-    alignItems: "center",
     width: "100%",
     height: "100%",
   },
   accountcreate: {
-    marginVertical: 40,
+    // marginVertical: 40,
     color: "#9374B7",
   },
   uptext: {
@@ -271,5 +288,26 @@ const styles = StyleSheet.create({
     padding: 13,
     borderRadius: 5,
     width: "90%",
+  },
+  ButtonView: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ButtonViewTouch: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "85%",
+    marginTop: 40,
+    height: 45,
+    backgroundColor: "#9374B7",
+    borderRadius: 5,
+    overflow: "hidden",
+  },
+  ConfirmTextTouch: {
+    fontSize: 18,
+    fontFamily: "Montserrat",
+    color: "#fff",
+    fontWeight: "400",
+    textAlign: "center",
   },
 });
