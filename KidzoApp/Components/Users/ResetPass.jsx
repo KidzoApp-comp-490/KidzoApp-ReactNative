@@ -14,7 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/ForgotPass/Logo 2.png";
 import Frame from "../../assets/ForgotPass/Frame.png";
 
-export default function forget({ navigation }) {
+export default function ResetPass({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.logoView}>
@@ -34,20 +34,15 @@ export default function forget({ navigation }) {
         <Text style={styles.word}>Follow the steps to reset a new one</Text>
       </View>
       <View style={styles.emailView}>
-        <Text style={styles.inpText}>E-mail</Text>
+        <Text style={styles.inpText}>Reset password</Text>
         <View style={styles.inpView}>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} secureTextEntry />
         </View>
       </View>
       <View style={styles.buttonview}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("Confirm");
-          }}
-        >
+        <TouchableOpacity style={styles.button}>
           <View style={styles.button2}>
-            <Text style={styles.button1}> Send verification code</Text>
+            <Text style={styles.button1}> Reset</Text>
           </View>
         </TouchableOpacity>
       </View>

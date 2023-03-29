@@ -11,167 +11,126 @@ import {
   Button,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import Logo from "../../assets/SignUp/Kidzo.png";
-import Back from "../../assets/SignUp/Back.png";
-import Frame1Icon from "../../assets/Confirm/Frame1.png";
-import BackIcon from "../../assets/Confirm/Frame.png";
+import Logo from "../../assets/VerficationCode/Logo 2.png";
+import Frame from "../../assets/VerficationCode/Frame.png";
 
-export default function Confirm({ navigation }) {
+export default function forget({ navigation }) {
   return (
-    <ImageBackground source={Back} resizeMode="cover" style={styles.background}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.logoView}>
-          <Image source={Logo} style={styles.logo} />
+    <View style={styles.container}>
+      <View style={styles.logoView}>
+        <Image source={Logo} style={styles.logo} />
+      </View>
+      <View style={styles.frameView}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("SingIn");
+          }}
+        >
+          <Image source={Frame} style={styles.frame} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.titleViwe}>
+        <Text style={styles.title}>Forgot your password!</Text>
+        <Text style={styles.word}>Follow the steps to reset a new one</Text>
+      </View>
+      <View style={styles.emailView}>
+        <Text style={styles.inpText}>Verification code</Text>
+        <View style={styles.inpView}>
+          <TextInput style={styles.input} />
         </View>
-        <View style={styles.body}>
-          <View style={styles.square}>
-            <View style={styles.BackView}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("SingIn");
-                }}
-              >
-                <Image source={BackIcon} style={styles.backIcon} />
-              </TouchableOpacity>
-              <Text style={styles.BackText}>Back to sign in</Text>
-            </View>
-            <View style={styles.ForgotTextView}>
-              <Text style={styles.ForgotText}>
-                Forgot Password{"\n"}
-                <Text style={styles.ConfirmText}>Confirm changes</Text>
-              </Text>
-            </View>
-            <View style={styles.emailView}>
-              <Text style={styles.inpText}>Verification Code</Text>
-              <View style={styles.inpView}>
-                <Image source={Frame1Icon} style={styles.frame1Icon} />
-                <TextInput style={styles.input} />
-              </View>
-              <View style={styles.ButtonView}>
-                <TouchableOpacity style={styles.ButtonViewTouch}>
-                  <Text style={styles.ConfirmTextTouch}>Confirm</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+      </View>
+      <View style={styles.buttonview}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("ResetPass");
+          }}
+        >
+          <View style={styles.button2}>
+            <Text style={styles.button1}> Confirm </Text>
           </View>
-        </View>
-      </ScrollView>
-      <StatusBar style="auto" />
-    </ImageBackground>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 const styles = StyleSheet.create({
-  background: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-  },
   container: {
-    marginTop: 40,
-    marginBottom: 10,
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "#ffff",
   },
   logoView: {
+    marginTop: 76,
     alignItems: "center",
-    marginTop: 50,
   },
   logo: {
-    width: 150,
-    height: 43,
+    width: 156,
+    height: 66,
   },
-  body: {
+  frameView: {
+    marginRight: 325,
+    marginLeft: 21,
+    marginTop: -50,
+  },
+  frame: {
+    width: 24,
+    height: 20,
+  },
+  titleViwe: {
     alignItems: "center",
-    marginTop: 79,
+    marginTop: 180,
   },
-  square: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-    width: "90%",
-    paddingBottom: 50,
-    borderRadius: 15,
-  },
-  BackView: {
-    flexDirection: "row",
-    margin: 15,
-  },
-  backIcon: {
-    width: 16,
-    height: 16,
-    marginLeft: 10,
-  },
-  BackText: {
-    marginHorizontal: 10,
-    fontSize: 14,
+  title: {
+    color: "#0B3B63",
     fontFamily: "Montserrat",
-    color: "#9374B7",
-    fontWeight: "400",
-  },
-  ForgotTextView: {
-    marginTop: 10,
-    marginBottom: 30,
-  },
-  ForgotText: {
+    fontWeight: 500,
     fontSize: 18,
-    fontWeight: "500",
-    fontFamily: "Montserrat",
-    color: "#9374B7",
-    textAlign: "center",
   },
-  ConfirmText: {
-    fontSize: 16,
+  word: {
+    color: "#0B3B63",
     fontFamily: "Montserrat",
-    color: "#9374B7",
-    textAlign: "center",
-    opacity: 0.5,
+    fontWeight: 500,
+    fontSize: 14,
+    opacity: 0.65,
+  },
+  emailView: {
+    marginTop: 32,
   },
   inpText: {
-    marginHorizontal: 25,
-    marginTop: 10,
-    fontSize: 14,
+    color: "#0B3B63A6",
+    marginBottom: 5,
     fontFamily: "Montserrat",
-    color: "#9374B7",
-    fontWeight: "400",
-    opacity: 0.5,
-  },
-  inpView: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    marginTop: 5,
-    marginHorizontal: 20,
-    borderRadius: 5,
-    alignItems: "center",
+    fontWeight: 500,
+    fontSize: 14,
+    opacity: 0.65,
   },
   input: {
-    backgroundColor: "#fff",
-    padding: 13,
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    borderWidth: 1,
+    width: 328,
+    height: 48,
     borderRadius: 5,
-    width: "90%",
   },
-  frame1Icon: {
-    width: 16,
-    height: 16,
-    marginLeft: 10,
+  buttonview: {
+    marginTop: 30,
   },
-  ButtonView: {
-    justifyContent: "center",
-    alignItems: "center",
-    // width: "100%",
-    // height: "100%",
-  },
-  ButtonViewTouch: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "88%",
-    // height: "40%",
-    marginTop: 40,
-    height: 45,
-    backgroundColor: "#9374B7",
+  button: {
     borderRadius: 5,
-    overflow: "hidden",
+    width: 328,
+    height: 48,
+    backgroundColor: "#FFA8C5",
+    color: "#ffff",
   },
-  ConfirmTextTouch: {
-    fontSize: 18,
+  button1: {
     fontFamily: "Montserrat",
-    color: "#fff",
-    fontWeight: "400",
-    textAlign: "center",
+    fontWeight: 500,
+    fontSize: 15,
+    color: "#ffff",
+  },
+  button2: {
+    alignItems: "center",
+    marginTop: 15,
   },
 });
