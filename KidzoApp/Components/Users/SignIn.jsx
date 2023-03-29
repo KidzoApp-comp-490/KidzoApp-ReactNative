@@ -15,6 +15,7 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/SignIn/Kidzo.png";
 import Or from "../../assets/SignIn/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
+import { TabFun } from "../../App";
 
 export default function SingIn({ navigation }) {
   return (
@@ -48,7 +49,12 @@ export default function SingIn({ navigation }) {
         </TouchableOpacity>
       </View>
       <View style={styles.buttonview}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("TabFun");
+          }}
+        >
           <View style={styles.button2}>
             <Text style={styles.button1}> Sign in</Text>
           </View>
