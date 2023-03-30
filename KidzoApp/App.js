@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import SingIn from "./Components/Users/SignIn";
-import SingUp from "./Components/Users/SingUp";
+import SignIn from "./Components/Users/SignIn";
+import SignUp from "./Components/Users/SignUp";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -17,6 +17,7 @@ import SettingIcon from "./assets/Home/Settings.png";
 import Profile from "./Components/Users/Profile";
 import Settings from "./Components/Users/Settings";
 import MomsCommunity from "./Components/MomsCommunity";
+import ResetPass from "./Components/Users/ResetPass";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -71,20 +72,20 @@ export function TabFun() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SingIn">
+      <Stack.Navigator initialRouteName="First">
         <Stack.Screen
           name="First"
           component={First}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="SingIn"
-          component={SingIn}
+          name="SignIn"
+          component={SignIn}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="SingUp"
-          component={SingUp}
+          name="SignUp"
+          component={SignUp}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -105,6 +106,11 @@ export default function App() {
         <Stack.Screen
           name="Confirm"
           component={Confirm}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ResetPass"
+          component={ResetPass}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

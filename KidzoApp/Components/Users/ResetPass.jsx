@@ -23,7 +23,7 @@ export default function ResetPass({ navigation }) {
       <View style={styles.frameView}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("SingIn");
+            navigation.navigate("Confirm");
           }}
         >
           <Image source={Frame} style={styles.frame} />
@@ -46,6 +46,7 @@ export default function ResetPass({ navigation }) {
           </View>
         </TouchableOpacity>
       </View>
+      <StatusBar style="auto" />
     </View>
   );
 }

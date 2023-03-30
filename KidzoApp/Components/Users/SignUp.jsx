@@ -14,7 +14,7 @@ import { RadioButton } from "react-native-paper";
 import OR from "../../assets/SignUp/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
 
-export default function SingUp({ navigation }) {
+export default function SignUp({ navigation }) {
   const [checked, setChecked] = useState("first");
   return (
     <View style={styles.body}>
@@ -28,7 +28,7 @@ export default function SingUp({ navigation }) {
             <Text style={styles.accountText}>Already have account? </Text>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("SingIn");
+                navigation.navigate("SignIn");
               }}
             >
               <Text style={styles.signInText}>Sign In</Text>

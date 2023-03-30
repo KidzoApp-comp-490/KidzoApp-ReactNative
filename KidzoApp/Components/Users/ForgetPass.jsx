@@ -23,7 +23,7 @@ export default function forget({ navigation }) {
       <View style={styles.frameView}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("SingIn");
+            navigation.navigate("SignIn");
           }}
         >
           <Image source={Frame} style={styles.frame} />
@@ -51,6 +51,7 @@ export default function forget({ navigation }) {
           </View>
         </TouchableOpacity>
       </View>
+      <StatusBar style="auto" />
     </View>
   );
 }

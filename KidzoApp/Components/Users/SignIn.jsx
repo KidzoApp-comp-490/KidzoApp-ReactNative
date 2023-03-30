@@ -17,73 +17,75 @@ import Or from "../../assets/SignIn/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
 import { TabFun } from "../../App";
 
-export default function SingIn({ navigation }) {
+export default function SignIn({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.logoView}>
-        <Image source={Logo} style={styles.logo} />
-      </View>
-      <View style={styles.titleView}>
-        <Text style={styles.title}> Sign In</Text>
-        <Text style={styles.word}>Welcome back!</Text>
-      </View>
-      <View style={styles.emailView}>
-        <Text style={styles.inpText}>E-mail</Text>
-        <View style={styles.inpView}>
-          <TextInput style={styles.input} />
+      <ScrollView>
+        <View style={styles.logoView}>
+          <Image source={Logo} style={styles.logo} />
         </View>
-      </View>
-      <View style={styles.passView}>
-        <Text style={styles.inpText}>Password</Text>
-        <View style={styles.inpView}>
-          <TextInput style={styles.input} secureTextEntry />
+        <View style={styles.titleView}>
+          <Text style={styles.title}> Sign In</Text>
+          <Text style={styles.word}>Welcome back!</Text>
         </View>
-      </View>
-      <View style={styles.forgotwordview}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("ForgetPass");
-          }}
-        >
-          <Text style={styles.forgotword}>Forgot password?</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonview}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate("TabFun");
-          }}
-        >
-          <View style={styles.button2}>
-            <Text style={styles.button1}> Sign in</Text>
+        <View style={styles.emailView}>
+          <Text style={styles.inpText}>E-mail</Text>
+          <View style={styles.inpView}>
+            <TextInput style={styles.input} />
           </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.orimageview}>
-        <Image source={Or} style={styles.orimage} />
-      </View>
-
-      <View style={styles.SinginWithGoogleView}>
-        <TouchableOpacity style={styles.touch}>
-          <Image source={Google} style={styles.GoogleIcon} />
-          <View style={styles.GoogleTextView}>
-            <Text style={styles.GoogleText}>Sing in with Google</Text>
+        </View>
+        <View style={styles.passView}>
+          <Text style={styles.inpText}>Password</Text>
+          <View style={styles.inpView}>
+            <TextInput style={styles.input} secureTextEntry />
           </View>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.uptextView}>
-        <Text style={styles.accountcreate}>
-          Don't have an account?
+        </View>
+        <View style={styles.forgotwordview}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("SingUp");
+              navigation.navigate("ForgetPass");
             }}
           >
-            <Text style={styles.uptext}>Sign up</Text>
+            <Text style={styles.forgotword}>Forgot password?</Text>
           </TouchableOpacity>
-        </Text>
-      </View>
+        </View>
+        <View style={styles.buttonview}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("TabFun");
+            }}
+          >
+            <View style={styles.button2}>
+              <Text style={styles.button1}> Sign in</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.orimageview}>
+          <Image source={Or} style={styles.orimage} />
+        </View>
+
+        <View style={styles.SinginWithGoogleView}>
+          <TouchableOpacity style={styles.touch}>
+            <Image source={Google} style={styles.GoogleIcon} />
+            <View style={styles.GoogleTextView}>
+              <Text style={styles.GoogleText}>Sing in with Google</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.uptextView}>
+          <Text style={styles.accountcreate}>
+            Don't have an account?
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("SignUp");
+              }}
+            >
+              <Text style={styles.uptext}>Sign up</Text>
+            </TouchableOpacity>
+          </Text>
+        </View>
+      </ScrollView>
       <StatusBar style="auto" />
     </View>
   );
