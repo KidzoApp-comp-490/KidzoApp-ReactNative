@@ -18,6 +18,9 @@ import Profile from "./Components/Users/Profile";
 import Settings from "./Components/Users/Settings";
 import MomsCommunity from "./Components/MomsCommunity";
 import ResetPass from "./Components/Users/ResetPass";
+import Medical from "./Components/Users/Medical";
+import Report from "./Components/Users/Report";
+import Info from "./Components/Users/Info";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -91,6 +94,26 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="Medical"
+          component={Medical}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Info"
+          component={Info}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Report"
+          component={Report}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="Settings"
+          component={Settings}
           options={{ headerShown: false }}
         />
         <Stack.Screen

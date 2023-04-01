@@ -16,7 +16,7 @@ import Expert from "../assets/Home/Expert.png";
 import MedicalHistory from "../assets/Home/MedicalHistory.png";
 import { StatusBar } from "expo-status-bar";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <View style={styles.content}>
       <ScrollView>
@@ -39,13 +39,23 @@ export default function Home() {
           <TouchableOpacity style={styles.square}>
             <Image source={Map} style={styles.squareImg} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              navigation.navigate("Info");
+            }}
+          >
             <Image source={Information} style={styles.squareImg} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.square}>
             <Image source={Expert} style={styles.squareImg} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              navigation.navigate("Medical");
+            }}
+          >
             <Image source={MedicalHistory} style={styles.squareImg} />
           </TouchableOpacity>
         </View>
