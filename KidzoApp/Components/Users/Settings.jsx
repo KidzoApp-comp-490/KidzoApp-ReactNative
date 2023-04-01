@@ -13,7 +13,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Iconset from "../../assets/Home/Settings.png";
 
-export default function Settings() {
+export default function Settings({ navigation }) {
   return (
     <View style={styles.body}>
       <View style={styles.wordView}>
@@ -26,7 +26,11 @@ export default function Settings() {
         <View style={styles.iconView}>
           <Image source={Iconset} style={styles.icon} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("ProfileSettings");
+          }}
+        >
           <Text style={styles.text}>Edit your profile</Text>
         </TouchableOpacity>
       </View>

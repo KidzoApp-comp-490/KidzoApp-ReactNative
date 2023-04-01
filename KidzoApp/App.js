@@ -21,6 +21,7 @@ import ResetPass from "./Components/Users/ResetPass";
 import Medical from "./Components/Users/Medical";
 import Report from "./Components/Users/Report";
 import Info from "./Components/Users/Info";
+import ProfileSettings from "./Components/Users/ProfileSettings";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -96,7 +97,7 @@ export default function App() {
           component={Home}
           options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Medical"
           component={Medical}
           options={{ headerShown: false }}
@@ -111,7 +112,7 @@ export default function App() {
           component={Report}
           options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Settings"
           component={Settings}
           options={{ headerShown: false }}
@@ -134,6 +135,11 @@ export default function App() {
         <Stack.Screen
           name="ResetPass"
           component={ResetPass}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ProfileSettings"
+          component={ProfileSettings}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
