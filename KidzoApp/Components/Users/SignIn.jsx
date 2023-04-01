@@ -20,13 +20,7 @@ import { TabFun } from "../../App";
 export default function SignIn({ navigation }) {
   return (
     <View style={styles.container}>
-      <ScrollView
-        contentContainerStyle={{
-          flex: 1,
-          alignItems: "center",
-          marginBottom: 100,
-        }}
-      >
+      <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.logoView}>
           <Image source={Logo} style={styles.logo} />
         </View>
