@@ -14,7 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/VerficationCode/Logo 2.png";
 import Frame from "../../assets/VerficationCode/Frame.png";
 
-export default function forget({ navigation }) {
+export default function Confirm({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.logoView}>

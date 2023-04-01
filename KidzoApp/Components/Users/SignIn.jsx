@@ -20,7 +20,13 @@ import { TabFun } from "../../App";
 export default function SignIn({ navigation }) {
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+          alignItems: "center",
+          marginBottom: 100,
+        }}
+      >
         <View style={styles.logoView}>
           <Image source={Logo} style={styles.logo} />
         </View>
@@ -92,7 +98,6 @@ export default function SignIn({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
     backgroundColor: "#ffff",
   },
@@ -210,6 +215,7 @@ const styles = StyleSheet.create({
   accountcreate: {
     color: "#0B3B63",
     opacity: 0.65,
+    marginBottom: 50,
   },
   uptext: {
     textDecorationLine: "underline",
