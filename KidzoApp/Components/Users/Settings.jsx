@@ -48,7 +48,12 @@ export default function Settings({ navigation }) {
         <View style={styles.iconView3}>
           <Image source={Iconset} style={styles.icon3} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={styles.square}
+          onPress={() => {
+            navigation.navigate("SignIn");
+          }}
+        >
           <Text style={styles.text}>Log Out</Text>
         </TouchableOpacity>
       </View>
