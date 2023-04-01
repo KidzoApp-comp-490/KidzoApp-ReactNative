@@ -76,7 +76,7 @@ export default function Report({ navigation }) {
         <View style={styles.DesView}>
           <Text style={styles.Des}>Add Description</Text>
           <View style={styles.inputView}>
-            <TextInput style={styles.inp} />
+            <TextInput style={styles.inp} multiline />
           </View>
         </View>
         <View style={styles.iconView}>
