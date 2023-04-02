@@ -18,7 +18,7 @@ export default function Settings({ navigation }) {
   return (
     <View style={styles.body}>
       <View style={styles.wordView}>
-        <Text style={styles.word}>Settings</Text>
+        <Text style={styles.word}>SETTINGS</Text>
       </View>
       <View style={styles.lineView}>
         <Text style={styles.line}> ────────────────────────────────</Text>

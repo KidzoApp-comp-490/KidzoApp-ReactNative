@@ -9,8 +9,10 @@ import {
   ScrollView,
   TouchableOpacity,
   Button,
+  Linking,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+
 import Frame from "../../assets/Info/Frame.png";
 import Group58 from "../../assets/Info/Group-58.png";
 import Group59 from "../../assets/Info/Group-59.png";
@@ -45,16 +47,56 @@ export default function Info({ navigation }) {
         </View>
 
         <View style={styles.content}>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              Linking.openURL(
+                "https://www.naeyc.org/our-work/families/observation-key-to-understanding-your-child"
+              ).catch((err) => {
+                console.error("Failed opening page because: ", err);
+                alert("Failed to open page");
+              });
+            }}
+          >
             <Image source={Group58} style={styles.squareImg} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              Linking.openURL(
+                "https://www.inclusivechildcare.org/resource-library/document/positive-guidance-through-ages"
+              ).catch((err) => {
+                console.error("Failed opening page because: ", err);
+                alert("Failed to open page");
+              });
+            }}
+          >
             <Image source={Group59} style={styles.squareImg} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              Linking.openURL(
+                "https://www.pbs.org/parents/thrive/simple-ways-to-help-your-child-become-a-better-problem-solver"
+              ).catch((err) => {
+                console.error("Failed opening page because: ", err);
+                alert("Failed to open page");
+              });
+            }}
+          >
             <Image source={Group60} style={styles.squareImg} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              Linking.openURL(
+                "https://www.naeyc.org/our-work/families/cooking-tiny-helper"
+              ).catch((err) => {
+                console.error("Failed opening page because: ", err);
+                alert("Failed to open page");
+              });
+            }}
+          >
             <Image source={Group61} style={styles.squareImg} />
           </TouchableOpacity>
         </View>

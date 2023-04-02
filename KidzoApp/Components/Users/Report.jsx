@@ -29,7 +29,7 @@ export default function Report({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.wordView}>
-            <Text style={styles.title}>New Report</Text>
+            <Text style={styles.title}>NEW REPORT</Text>
           </View>
         </View>
         <View style={styles.lineView}>
