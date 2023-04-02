@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Iconset from "../../assets/Home/Settings.png";
+import { SignOut } from "../../db/auth/auth";
 
 export default function Settings({ navigation }) {
   return (
@@ -51,7 +52,11 @@ export default function Settings({ navigation }) {
         <TouchableOpacity
           style={styles.square}
           onPress={() => {
-            navigation.navigate("SignIn");
+            SignOut().then(() => {
+              console.log("sign out");
+              navigation.navigate("SignIn");
+              alert("You signed out");
+            });
           }}
         >
           <Text style={styles.text}>Log Out</Text>

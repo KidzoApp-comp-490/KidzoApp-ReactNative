@@ -7,7 +7,7 @@ import {
   confirmPasswordReset,
   signInWithCredential,
   FacebookAuthProvider,
-
+  signOut,
 } from "firebase/auth";
 
 // Listen for authentication state to change.
@@ -24,6 +24,18 @@ async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
+async function SignOut() {
+  return signOut(auth)
+    .then(() => {})
+    .catch((error) => {});
+}
 
+async function getUserUId() {
+  if (auth.currentUser != null) {
+    return auth.currentUser.uid;
+  } else {
+    return null;
+  }
+}
 
-export { register, login };
+export { register, login, SignOut, getUserUId };

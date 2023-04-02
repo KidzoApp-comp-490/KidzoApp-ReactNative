@@ -1,20 +1,30 @@
-import React from "react";
 import {
   View,
   Text,
-  ImageBackground,
   StyleSheet,
   Image,
-  TextInput,
   ScrollView,
   TouchableOpacity,
-  Button,
 } from "react-native";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import Frame from "../../assets/MedicalH/Frame.png";
 import Icon from "../../assets/MedicalH/material-symbols_add-circle-outline-rounded.png";
-import Imagem from "../../assets/MedicalH/material-symbols_edit-rounded.png";
-export default function Medical({ navigation }) {
+import Medical from "./Medical";
+
+export default function MedicalItem({ navigation }) {
+  const arrOfObjects = [
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
+  ];
   return (
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -50,33 +60,16 @@ export default function Medical({ navigation }) {
             Add new medical reprt{"\n         "}for your child
           </Text>
         </View>
-        <View style={styles.bordView}>
-          <Text style={styles.statment1}> codeandflue</Text>
-          <Text style={styles.statment2}> 13Mar.,2023</Text>
-          <View style={styles.imageView}>
-            <TouchableOpacity>
-              <Image source={Imagem} style={styles.image} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.bordView}>
-          <Text style={styles.statment1}> Smallpox</Text>
-          <Text style={styles.statment2}> 1 Jun.,2023</Text>
-          <View style={styles.imageView}>
-            <TouchableOpacity>
-              <Image source={Imagem} style={styles.image} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.bordView}>
-          <Text style={styles.statment1}> Insect allergy</Text>
-          <Text style={styles.statment2}> 25 Feb.,2023</Text>
-          <View style={styles.imageView}>
-            <TouchableOpacity>
-              <Image source={Imagem} style={styles.image} />
-            </TouchableOpacity>
-          </View>
-        </View>
+        {arrOfObjects.map((e, index) => (
+          <Medical
+            text1={e.text1}
+            day={e.day}
+            month={e.month}
+            year={e.year}
+            key={index}
+          />
+        ))}
+        <View style={{ marginBottom: 50 }}></View>
       </ScrollView>
       <StatusBar style="auto" />
     </View>
@@ -135,36 +128,5 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontWeight: 300,
     fontSize: 14,
-  },
-  bordView: {
-    marginTop: 32,
-    borderWidth: 1,
-    width: 328,
-    height: 48,
-    borderRadius: 5,
-    borderColor: "#FFA8C5",
-    flexDirection: "row",
-    alignItems: "center",
-    marginHorizontal: 20,
-    justifyContent: "space-between",
-  },
-  statment1: {
-    color: "#0B3B63",
-    fontFamily: "Montserrat",
-    fontWeight: 500,
-    fontSize: 16,
-    marginLeft: 21,
-  },
-  statment2: {
-    color: "#0B3B63",
-    fontFamily: "Montserrat",
-    fontWeight: 500,
-    fontSize: 16,
-  },
-  imageView: {},
-  image: {
-    width: 12.18,
-    height: 12.17,
-    marginRight: 18,
   },
 });

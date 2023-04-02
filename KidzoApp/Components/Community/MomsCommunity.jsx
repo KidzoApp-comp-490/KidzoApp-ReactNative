@@ -7,13 +7,25 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
-import ImageIcon from "../assets/Community/ant-design_picture-outlined.png";
-import Heart from "../assets/Community/Frame.png";
-import Comment from "../assets/Community/Comment.png";
-import PostIcon from "../assets/Profile/image3.png";
+import React, { useState } from "react";
+import Heart from "../../assets/Community/Frame.png";
+import ColoredHeart from "../../assets/Community/Group.png";
+import Comment from "../../assets/Community/Comment.png";
 
-export default function MomsCommunity() {
+export default function MomsCommunity({ iconSrc, text }) {
+  const [icon, setIcon] = useState(true);
+  const [reactNum, setReactNum] = useState(0);
+  const clickHeart = () => {
+    if (icon) {
+      setIcon(false);
+      setReactNum(reactNum + 1);
+    } else {
+      setIcon(true);
+      setReactNum(reactNum - 1);
+    }
+  };
+  let imageSource = icon ? Heart : ColoredHeart;
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView
@@ -21,22 +33,15 @@ export default function MomsCommunity() {
           alignItems: "center",
         }}
       >
-        <Text style={styles.CommunityTxt}>Moms Community</Text>
-        <View style={styles.InpView}>
-          <TextInput
-            style={styles.Inp}
-            placeholder="What's in your mind?"
-            placeholderTextColor="#FFA8C5"
-          />
-          <Image source={ImageIcon} style={styles.ImageIcon} />
-        </View>
         <View style={styles.PostsView}>
-          <Text style={styles.PostTitle}>Happy Mother's Day!</Text>
-          <Image source={PostIcon} style={{ width: 328, height: 243 }} />
+          <Text style={styles.PostTitle}>{text}</Text>
+          <Image source={iconSrc} style={{ width: 328, height: 243 }} />
           <View style={styles.ReactsView}>
             <View style={styles.LeftPart}>
-              <Image source={Heart} style={{ width: 24, height: 24 }} />
-              <Text style={styles.ReactTxt}>12 Love</Text>
+              <TouchableOpacity onPress={clickHeart}>
+                <Image source={imageSource} style={{ width: 24, height: 23 }} />
+              </TouchableOpacity>
+              <Text style={styles.ReactTxt}>{reactNum} Love</Text>
               <View style={styles.VerticalPar}></View>
               <View style={styles.RightPart}>
                 <Image source={Comment} style={{ width: 24, height: 24 }} />
@@ -45,7 +50,7 @@ export default function MomsCommunity() {
             </View>
           </View>
         </View>
-        <View style={styles.PostsView2}>
+        {/* <View style={styles.PostsView2}>
           <Text style={styles.PostTitle2}>
             Happy Mother's Day!Happy Mother's Day!Happy Mother's Day!Happy
             Mother's Day!Happy Mother's Day!Happy Mother's Day!Happy Mother's
@@ -57,46 +62,16 @@ export default function MomsCommunity() {
             Mother's Day!Happy Mother's Day!Happy Mother's Day!Happy Mother's
             Day!
           </Text>
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  CommunityTxt: {
-    fontSize: 18,
-    fontWeight: "700",
-    fontFamily: "Montserrat",
-    color: "#0B3B63",
-    marginTop: 77,
-    marginRight: 180,
-    textAlign: "center",
-  },
-  InpView: {
-    marginTop: 33,
-    flexDirection: "row",
-    width: 328,
-    height: 32,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: "#FFA8C5",
-    alignItems: "center",
-  },
-  Inp: {
-    width: 300,
-    height: 32,
-    borderRadius: 30,
-    paddingLeft: 16,
-  },
-  ImageIcon: {
-    width: 14,
-    height: 14,
-    marginRight: 18,
-  },
   PostsView: {
     width: 370,
-    height: 360,
+    // height: 360,
     borderRadius: 15,
     borderColor: "rgba(11, 59, 99, 0.15)",
     borderWidth: 1,
@@ -158,7 +133,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 16,
     alignItems: "center",
-    marginBottom: 100,
   },
   PostTitle2: {
     fontSize: 14,

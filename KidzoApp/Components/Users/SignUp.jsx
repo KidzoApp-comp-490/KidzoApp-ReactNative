@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -13,9 +13,82 @@ import Logo from "../../assets/SignIn/Kidzo.png";
 import { RadioButton } from "react-native-paper";
 import OR from "../../assets/SignUp/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
+import { register, getUserUId } from "../../db/auth/auth";
+import { auth, provider } from "../../db/Config";
+import { Addusers } from "../../db/Edit/users";
+import { signInWithPopup } from "firebase/auth";
 
 export default function SignUp({ navigation }) {
+  const [value, setValue] = useState("");
+  const SingUpWithGoogle = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
+  };
+
   const [checked, setChecked] = useState("first");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [gender, setGender] = useState("");
+
+  const checkDate = () => {
+    if (
+      email.length === 0 &&
+      password.length === 0 &&
+      fName.length === 0 &&
+      lName.length === 0 &&
+      phone.length === 0 &&
+      day.length === 0 &&
+      month.length === 0 &&
+      year.length === 0
+    ) {
+      alert("invalid information");
+    } else if (password.length < 8) {
+      alert("Password must be at least 8 characters");
+    } else {
+      register(email, password)
+        .then(() => {
+          console.log("registerd");
+          alert("Register Success!\nPlease Login");
+          navigation.navigate("SignIn");
+          getUserUId().then((id) => {
+            Addusers({
+              uid: id,
+              email: email,
+              password: password,
+              fName: fName,
+              lName: lName,
+              phone: phone,
+              day: day,
+              month: month,
+              year: year,
+              gender: gender,
+            });
+          });
+        })
+        .catch((err) => {
+          {
+            if (
+              err.message.includes("already-in-use") &&
+              email !== "" &&
+              password !== ""
+            ) {
+              alert("The email is already exist");
+            } else if (err.message.includes("invalid-email") && email !== "") {
+              alert("The Email is incorrect");
+            }
+          }
+        });
+    }
+  };
+
   return (
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -38,7 +111,13 @@ export default function SignUp({ navigation }) {
         <View style={styles.emailView}>
           <Text style={styles.inpText}>Email</Text>
           <View style={styles.inpView}>
-            <TextInput style={styles.input} keyboardType="email-address" />
+            <TextInput
+              style={styles.input}
+              keyboardType="email-address"
+              onChangeText={(val) => {
+                setEmail(val);
+              }}
+            />
           </View>
         </View>
         <View style={styles.PassView}>
@@ -50,6 +129,9 @@ export default function SignUp({ navigation }) {
               autoCorrect={false}
               textContentType="newPassword"
               secureTextEntry
+              onChangeText={(val) => {
+                setPassword(val);
+              }}
             />
           </View>
         </View>
@@ -57,20 +139,36 @@ export default function SignUp({ navigation }) {
           <View style={styles.fNameView}>
             <Text style={styles.fName}>First name</Text>
             <View style={styles.fNameInpView}>
-              <TextInput style={styles.fNameInp} />
+              <TextInput
+                style={styles.fNameInp}
+                onChangeText={(val) => {
+                  setFName(val);
+                }}
+              />
             </View>
           </View>
           <View style={styles.lNameView}>
             <Text style={styles.lName}>Last name</Text>
             <View style={styles.lNameInpView}>
-              <TextInput style={styles.lNameInp} />
+              <TextInput
+                style={styles.lNameInp}
+                onChangeText={(val) => {
+                  setLName(val);
+                }}
+              />
             </View>
           </View>
         </View>
         <View style={styles.PhoneView}>
           <Text style={styles.inpText}>Phone number</Text>
           <View style={styles.inpView}>
-            <TextInput style={styles.input} keyboardType="number-pad" />
+            <TextInput
+              style={styles.input}
+              keyboardType="number-pad"
+              onChangeText={(val) => {
+                setPhone(val);
+              }}
+            />
           </View>
         </View>
         <View style={styles.Gender}>
@@ -81,7 +179,9 @@ export default function SignUp({ navigation }) {
               <RadioButton
                 value="first"
                 status={checked === "first" ? "checked" : "unchecked"}
-                onPress={() => setChecked("first")}
+                onPress={() => {
+                  setGender("Female"), setChecked("first");
+                }}
                 color="#FFA8C5"
                 uncheckedColor="#FFA8C5"
               />
@@ -91,7 +191,9 @@ export default function SignUp({ navigation }) {
               <RadioButton
                 value="second"
                 status={checked === "second" ? "checked" : "unchecked"}
-                onPress={() => setChecked("second")}
+                onPress={() => {
+                  setChecked("second"), setGender("male");
+                }}
                 color="#FFA8C5"
                 uncheckedColor="#FFA8C5"
               />
@@ -106,6 +208,9 @@ export default function SignUp({ navigation }) {
                 style={styles.DMYInp}
                 placeholder="Day"
                 keyboardType="number-pad"
+                onChangeText={(val) => {
+                  setDay(val);
+                }}
               />
             </View>
             <View style={styles.monthInpView}>
@@ -113,6 +218,9 @@ export default function SignUp({ navigation }) {
                 style={styles.DMYInp}
                 placeholder="Month"
                 keyboardType="number-pad"
+                onChangeText={(val) => {
+                  setMonth(val);
+                }}
               />
             </View>
             <View style={styles.yearInpView}>
@@ -120,18 +228,32 @@ export default function SignUp({ navigation }) {
                 style={styles.DMYInp}
                 placeholder="Year"
                 keyboardType="number-pad"
+                onChangeText={(val) => {
+                  setYear(val);
+                }}
               />
             </View>
           </View>
+        </View>
+        <View style={styles.buttonview}>
+          <TouchableOpacity style={styles.button} onPress={checkDate}>
+            <View style={styles.button2}>
+              <Text style={styles.button1}> Sign Up</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.orView}>
           <Image source={OR} style={styles.or} />
         </View>
         <View style={styles.SingUpWithGoogleView}>
-          <TouchableOpacity style={styles.touch}>
-            <Image source={Google} style={styles.GoogleIcon} />
-            <Text style={styles.GoogleText}>SingUp with Google</Text>
-          </TouchableOpacity>
+          {value ? (
+            navigation.navigate("TabFun")
+          ) : (
+            <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
+              <Image source={Google} style={styles.GoogleIcon} />
+              <Text style={styles.GoogleText}>SingUp with Google</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
       <StatusBar style="auto" />
@@ -210,9 +332,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginTop: 32,
   },
-  // fNameView: {
-  //   width: "48%",
-  // },
   fName: {
     marginBottom: 5,
     fontSize: 14,
@@ -275,7 +394,6 @@ const styles = StyleSheet.create({
     borderColor: "#FFA8C5",
     borderRadius: 5,
     marginRight: 16,
-    // padding: 5,
   },
   FemaleTxt: {
     fontSize: 14,
@@ -292,7 +410,6 @@ const styles = StyleSheet.create({
     height: 48,
     borderWidth: 1,
     borderColor: "#FFA8C5",
-    // padding: 5,
     borderRadius: 5,
   },
   maleTxt: {
@@ -335,10 +452,29 @@ const styles = StyleSheet.create({
   monthInpView: {
     marginRight: 13.65,
   },
+  buttonview: {
+    marginTop: 30,
+  },
+  button: {
+    borderRadius: 5,
+    width: 328,
+    height: 48,
+    backgroundColor: "#FFA8C5",
+    color: "#ffff",
+  },
+  button1: {
+    fontFamily: "Montserrat",
+    fontWeight: 500,
+    fontSize: 15,
+    color: "#ffff",
+  },
+  button2: {
+    alignItems: "center",
+    marginTop: 15,
+  },
   orView: {
     marginTop: 32,
     alignItems: "center",
-    // marginHorizontal: 16,
   },
   or: {
     width: 328,
@@ -375,361 +511,3 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-
-// import React from "react";
-// import {
-//   View,
-//   Text,
-//   ImageBackground,
-//   StyleSheet,
-//   Image,
-//   TextInput,
-//   ScrollView,
-//   KeyboardAvoidingView,
-//   TouchableOpacity,
-// } from "react-native";
-// import { StatusBar } from "expo-status-bar";
-// // import Logo from "../../assets/SignUp/Kidzo.png";
-// // import Back from "../../assets/SignUp/Back.png";
-// // import EmailIcon from "../../assets/SignUp/mdi_email-alert.png";
-// // import PassIcon from "../../assets/SignUp/Frame.png";
-// // import Name from "../../assets/SignUp/name.png";
-// // import Phone from "../../assets/SignUp/phone.png";
-// // import Gender from "../../assets/SignUp/gender.png";
-// // import Day from "../../assets/SignUp/day.png";
-// // import Month from "../../assets/SignUp/month.png";
-// // import Year from "../../assets/SignUp/year.png";
-// // import Google from "../../assets/SignUp/logos_google-icon.png";
-
-// export default function SingUp({ navigation }) {
-//   return (
-//     // <ImageBackground source={Back} resizeMode="cover" style={styles.background}>
-//     <ScrollView
-//       contentContainerStyle={{ flex: 1, width: "100%", height: "100%" }}
-//     >
-//       <View style={styles.logoView}>
-//         {/* <Image source={Logo} style={styles.logo} /> */}
-//       </View>
-//       <View style={styles.body}>
-//         <View style={styles.square}>
-//           <View style={styles.signUpTextView}>
-//             <Text style={styles.signUpText}>
-//               Sign Up{"\n"}
-//               <Text style={styles.accountText}>Already have account? </Text>
-//               <TouchableOpacity
-//                 onPress={() => {
-//                   navigation.navigate("SingIn");
-//                 }}
-//               >
-//                 <Text style={styles.signInText}>Sign In</Text>
-//               </TouchableOpacity>
-//             </Text>
-//           </View>
-//           <View style={styles.emailView}>
-//             <Text style={styles.inpText}>E-mail</Text>
-//             <View style={styles.inpView}>
-//               {/* <Image source={EmailIcon} style={styles.emailIcon} /> */}
-//               <TextInput style={styles.input} />
-//             </View>
-//           </View>
-//           <View style={styles.passView}>
-//             <Text style={styles.inpText}>Password</Text>
-//             <View style={styles.inpView}>
-//               {/* <Image source={PassIcon} style={styles.passIcon} /> */}
-//               <TextInput style={styles.input} />
-//             </View>
-//           </View>
-//           <View style={styles.flNameView}>
-//             <View style={styles.fNameView}>
-//               <Text style={styles.fName}>First name</Text>
-//               <View style={styles.fNameInpView}>
-//                 {/* <Image source={Name} style={styles.fNameIcon} /> */}
-//                 <TextInput style={styles.fNameInp} />
-//               </View>
-//             </View>
-//             <View style={styles.lNameView}>
-//               <Text style={styles.lName}>Last name</Text>
-//               <View style={styles.lNameInpView}>
-//                 {/* <Image source={Name} style={styles.lNameIcon} /> */}
-//                 <TextInput style={styles.lNameInp} />
-//               </View>
-//             </View>
-//           </View>
-//           <View style={styles.phoneView}>
-//             <Text style={styles.inpText}>Phone number</Text>
-//             <View style={styles.inpView}>
-//               {/* <Image source={Phone} style={styles.passIcon} /> */}
-//               <TextInput style={styles.input} />
-//             </View>
-//           </View>
-//           <View style={styles.genderView}>
-//             <Text style={styles.inpText}>Gender</Text>
-//             <View style={styles.inpView}>
-//               {/* <Image source={Gender} style={styles.passIcon} /> */}
-//               <TextInput style={styles.input} />
-//             </View>
-//           </View>
-//           <View style={styles.birthdayView}>
-//             <View style={styles.dayView}>
-//               <Text style={styles.birthday}>Birthday</Text>
-//               <View style={styles.dayMonthView}>
-//                 <View style={styles.DMYInpView}>
-//                   {/* <Image source={Day} style={styles.DMYIcon} /> */}
-//                   <TextInput style={styles.DMYInp} />
-//                 </View>
-//                 <View style={styles.DMYInpView}>
-//                   {/* <Image source={Month} style={styles.DMYIcon} /> */}
-//                   <TextInput style={styles.DMYInp} />
-//                 </View>
-//                 <View style={styles.DMYInpView}>
-//                   {/* <Image source={Year} style={styles.DMYIcon} /> */}
-//                   <TextInput style={styles.DMYInp} />
-//                 </View>
-//               </View>
-//             </View>
-//           </View>
-//           <Text style={styles.orText}>
-//             {"                                        "}
-//             <Text> Or </Text>
-//             {"                                        "}
-//           </Text>
-//           <View style={styles.SingUpWithGoogleView}>
-//             <TouchableOpacity style={styles.touch}>
-//               {/* <Image source={Google} style={styles.GoogleIcon} /> */}
-//               <Text style={styles.GoogleText}>SingUp with Google</Text>
-//             </TouchableOpacity>
-//           </View>
-//         </View>
-//       </View>
-//       <StatusBar style="auto" />
-//     </ScrollView>
-//     // </ImageBackground>
-//   );
-// }
-// const styles = StyleSheet.create({
-//   background: {
-//     flex: 1,
-//     width: "100%",
-//     height: "100%",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   logoView: {
-//     alignItems: "center",
-//     marginTop: 40,
-//   },
-//   logo: {
-//     width: 210,
-//     height: 60,
-//   },
-//   body: {
-//     backgroundColor: "pink",
-//     // justifyContent: "center",
-//     alignItems: "center",
-//     flex: 1,
-//     width: "100%",
-//     height: "100%",
-//     // marginTop: 40,
-//   },
-//   square: {
-//     backgroundColor: "rgba(255, 255, 255, 0.5)",
-//     width: "92%",
-//     height: "100%",
-//     borderRadius: 15,
-//     paddingBottom: 20,
-//   },
-//   signUpTextView: {
-//     marginTop: 15,
-//   },
-//   signUpText: {
-//     fontSize: 18,
-//     fontWeight: "500",
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     textAlign: "center",
-//   },
-//   accountText: {
-//     fontSize: 18,
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     textAlign: "center",
-//     opacity: 0.5,
-//   },
-//   signInText: {
-//     fontSize: 18,
-//     fontWeight: "500",
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     textDecorationLine: "underline",
-//   },
-//   inpText: {
-//     marginHorizontal: 25,
-//     marginTop: 10,
-//     fontSize: 14,
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     fontWeight: "400",
-//     opacity: 0.5,
-//   },
-//   inpView: {
-//     flexDirection: "row",
-//     backgroundColor: "#fff",
-//     marginTop: 5,
-//     marginHorizontal: 20,
-//     borderRadius: 5,
-//     alignItems: "center",
-//   },
-//   input: {
-//     backgroundColor: "#fff",
-//     padding: 13,
-//     borderRadius: 5,
-//     width: "93%",
-//   },
-//   emailIcon: {
-//     width: 16,
-//     height: 10.67,
-//     marginLeft: 10,
-//   },
-//   passIcon: {
-//     width: 16,
-//     height: 16,
-//     marginLeft: 10,
-//   },
-//   flNameView: {
-//     flexDirection: "row",
-//     marginHorizontal: 20,
-//   },
-//   fNameView: {
-//     width: "48%",
-//   },
-//   fName: {
-//     marginTop: 10,
-//     fontSize: 14,
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     fontWeight: "400",
-//     opacity: 0.5,
-//   },
-//   fNameInpView: {
-//     flexDirection: "row",
-//     backgroundColor: "#fff",
-//     marginTop: 5,
-//     borderRadius: 5,
-//     alignItems: "center",
-//   },
-//   fNameIcon: {
-//     width: 16,
-//     height: 16,
-//     marginHorizontal: 10,
-//   },
-//   fNameInp: {
-//     backgroundColor: "#fff",
-//     padding: 13,
-//     borderRadius: 5,
-//     width: "75%",
-//   },
-//   lNameView: {
-//     width: "48%",
-//   },
-//   lName: {
-//     marginHorizontal: 10,
-//     marginTop: 10,
-//     fontSize: 14,
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     fontWeight: "400",
-//     opacity: 0.5,
-//   },
-//   lNameInpView: {
-//     marginLeft: 10,
-//     flexDirection: "row",
-//     backgroundColor: "#fff",
-//     marginTop: 5,
-//     borderRadius: 5,
-//     alignItems: "center",
-//   },
-//   lNameIcon: {
-//     width: 16,
-//     height: 16,
-//     marginHorizontal: 10,
-//   },
-//   lNameInp: {
-//     backgroundColor: "#fff",
-//     padding: 13,
-//     borderRadius: 5,
-//     width: "88%",
-//   },
-//   birthdayView: {
-//     flexDirection: "row",
-//     marginHorizontal: 20,
-//   },
-//   birthday: {
-//     marginTop: 10,
-//     fontSize: 14,
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     fontWeight: "400",
-//     opacity: 0.5,
-//   },
-//   dayMonthView: {
-//     flexDirection: "row",
-//     backgroundColor: "#fff",
-//     marginTop: 5,
-//     borderRadius: 5,
-//     alignItems: "center",
-//     width: "99%",
-//   },
-//   DMYInpView: {
-//     flexDirection: "row",
-//     alignItems: "center",
-//     width: "35%",
-//   },
-//   DMYIcon: {
-//     width: 16,
-//     height: 16,
-//     marginLeft: 10,
-//   },
-//   DMYInp: {
-//     backgroundColor: "#fff",
-//     padding: 13,
-//     borderRadius: 5,
-//     width: "60%",
-//   },
-//   orText: {
-//     textDecorationLine: "underline",
-//     fontSize: 14,
-//     fontWeight: "500",
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     textAlign: "center",
-//     marginVertical: 10,
-//   },
-//   SingUpWithGoogleView: {
-//     justifyContent: "center",
-//     alignItems: "center",
-//     height: "6%",
-//     paddingBottom: 2,
-//   },
-//   touch: {
-//     flexDirection: "row",
-//     backgroundColor: "#fff",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     width: "90%",
-//     height: "100%",
-//     borderRadius: 5,
-//   },
-//   GoogleIcon: {
-//     marginHorizontal: 10,
-//     width: 16,
-//     height: 16,
-//   },
-//   GoogleText: {
-//     fontSize: 14,
-//     fontWeight: "500",
-//     fontFamily: "Montserrat",
-//     color: "#9374B7",
-//     textAlign: "center",
-//     marginVertical: 10,
-//   },
-// });

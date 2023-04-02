@@ -1,23 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
-  ImageBackground,
   StyleSheet,
   Image,
   TextInput,
-  Button,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/SignIn/Kidzo.png";
 import Or from "../../assets/SignIn/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
-import { TabFun } from "../../App";
+import { login } from "../../db/auth/auth";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../db/Config";
 
 export default function SignIn({ navigation }) {
+  const [value, setValue] = useState("");
+  const SingInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
+  };
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const checkDate = () => {
+    if (!email.includes("@") || email.length === 0 || password.length < 8)
+      alert("invalid information");
+    else
+      login(email, password)
+        .then(() => {
+          navigation.navigate("TabFun");
+          alert("Login Success!");
+        })
+        .catch((e) => {
+          if (
+            e.message.includes("invalid-email") &&
+            email === "" &&
+            password === ""
+          ) {
+            alert("Please enter your email and password");
+          } else if (e.message.includes("invalid-email") && email === "") {
+            alert("Please enter your email");
+          } else if (e.message.includes("invalid-email") && email !== "") {
+            alert("The Email is incorrect");
+          } else if (e.message.includes("internal-error") && password === "") {
+            alert("Please enter your password");
+          } else if (e.message.includes("wrong-password") && password !== "") {
+            alert("The password is incorrect");
+          } else if (
+            e.message.includes("user-not-found") &&
+            email !== "" &&
+            password !== ""
+          ) {
+            alert("The user is not exist");
+          }
+        });
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -31,13 +75,20 @@ export default function SignIn({ navigation }) {
         <View style={styles.emailView}>
           <Text style={styles.inpText}>E-mail</Text>
           <View style={styles.inpView}>
-            <TextInput style={styles.input} />
+            <TextInput
+              style={styles.input}
+              onChangeText={(val) => setEmail(val)}
+            />
           </View>
         </View>
         <View style={styles.passView}>
           <Text style={styles.inpText}>Password</Text>
           <View style={styles.inpView}>
-            <TextInput style={styles.input} secureTextEntry />
+            <TextInput
+              style={styles.input}
+              secureTextEntry
+              onChangeText={(val) => setPassword(val)}
+            />
           </View>
         </View>
         <View style={styles.forgotwordview}>
@@ -50,12 +101,7 @@ export default function SignIn({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.buttonview}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate("TabFun");
-            }}
-          >
+          <TouchableOpacity style={styles.button} onPress={checkDate}>
             <View style={styles.button2}>
               <Text style={styles.button1}> Sign in</Text>
             </View>
@@ -66,12 +112,16 @@ export default function SignIn({ navigation }) {
         </View>
 
         <View style={styles.SinginWithGoogleView}>
-          <TouchableOpacity style={styles.touch}>
-            <Image source={Google} style={styles.GoogleIcon} />
-            <View style={styles.GoogleTextView}>
-              <Text style={styles.GoogleText}>Sing in with Google</Text>
-            </View>
-          </TouchableOpacity>
+          {value ? (
+            navigation.navigate("TabFun")
+          ) : (
+            <TouchableOpacity style={styles.touch} onPress={SingInWithGoogle}>
+              <Image source={Google} style={styles.GoogleIcon} />
+              <View style={styles.GoogleTextView}>
+                <Text style={styles.GoogleText}>Sing in with Google</Text>
+              </View>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={styles.uptextView}>
           <Text style={styles.accountcreate}>
@@ -179,7 +229,6 @@ const styles = StyleSheet.create({
   orimageview: {
     marginTop: 30,
   },
-
   touch: {
     borderColor: "#0B3B63",
     borderWidth: 1,

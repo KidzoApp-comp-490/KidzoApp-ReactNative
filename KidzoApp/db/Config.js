@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,12 +16,13 @@ const firebaseConfig = {
   storageBucket: "kidzoapp-56775.appspot.com",
   messagingSenderId: "685443084010",
   appId: "1:685443084010:web:6d4567d2c97e4b288eb193",
-  measurementId: "G-DD0ND9P7D7"
+  measurementId: "G-DD0ND9P7D7",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getFirestore(app);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-export { app,auth};
+export { app, auth, provider, db };

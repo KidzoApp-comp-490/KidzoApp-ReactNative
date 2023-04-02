@@ -16,12 +16,14 @@ import CommunityIcon from "./assets/Home/comm.png";
 import SettingIcon from "./assets/Home/Settings.png";
 import Profile from "./Components/Users/Profile";
 import Settings from "./Components/Users/Settings";
-import MomsCommunity from "./Components/MomsCommunity";
+// import MomsCommunity from "./Components/MomsCommunity";
 import ResetPass from "./Components/Users/ResetPass";
-import Medical from "./Components/Users/Medical";
+// import Medical from "./Components/Medical/Medical";
+import MedicalItem from "./Components/Medical/MedicalItem";
 import Report from "./Components/Users/Report";
 import Info from "./Components/Users/Info";
 import ProfileSettings from "./Components/Users/ProfileSettings";
+import MomsCommunityItem from "./Components/Community/MomsCommunityItem";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -53,7 +55,7 @@ export function TabFun() {
       />
       <Tab.Screen
         name="MoMS"
-        component={MomsCommunity}
+        component={MomsCommunityItem}
         options={{
           tabBarIcon: () => (
             <Image style={styles.TabIcon} source={CommunityIcon} />
@@ -99,7 +101,7 @@ export default function App() {
         />
         <Stack.Screen
           name="Medical"
-          component={Medical}
+          component={MedicalItem}
           options={{ headerShown: false }}
         />
         <Stack.Screen
