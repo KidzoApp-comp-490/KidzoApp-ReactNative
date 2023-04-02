@@ -29,7 +29,7 @@ export default function Medical({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.wordView}>
-            <Text style={styles.title}>Medical History</Text>
+            <Text style={styles.title}>MEDICAL HISTORY</Text>
           </View>
         </View>
         <View style={styles.lineView}>
