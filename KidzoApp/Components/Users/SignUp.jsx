@@ -323,6 +323,7 @@ const styles = StyleSheet.create({
     width: 328,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   PassView: {
     marginTop: 32,
@@ -347,6 +348,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   lNameView: {
     marginLeft: 16,
@@ -366,6 +368,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   PhoneView: {
     marginTop: 32,
@@ -442,6 +445,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: 14,
     color: "#0B3B63",
+    paddingLeft: 5,
   },
   dayInpView: {
     width: 99.7,

@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     width: 328,
     height: 48,
     borderRadius: 5,
+    paddingLeft: 5,
   },
   buttonview: {
     marginTop: 30,
