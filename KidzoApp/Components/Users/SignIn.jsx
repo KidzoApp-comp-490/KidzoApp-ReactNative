@@ -15,6 +15,8 @@ import Google from "../../assets/SignIn/logos_google-icon.png";
 import { login } from "../../db/auth/auth";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../db/Config";
+import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
+import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignIn({ navigation }) {
   const [value, setValue] = useState("");
@@ -62,6 +64,12 @@ export default function SignIn({ navigation }) {
         });
   };
 
+  const [icon, setIcon] = useState(true);
+  const clickEye = () => {
+    icon ? setIcon(false) : setIcon(true);
+  };
+  let imageSource = icon ? PassIconInV : PassIconV;
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -83,13 +91,37 @@ export default function SignIn({ navigation }) {
         </View>
         <View style={styles.passView}>
           <Text style={styles.inpText}>Password</Text>
-          <View style={styles.inpView}>
-            <TextInput
-              style={styles.input}
-              secureTextEntry
-              onChangeText={(val) => setPassword(val)}
-            />
-          </View>
+          {icon ? (
+            <View style={styles.inpViewPass}>
+              <TextInput
+                style={styles.inputPass}
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="newPassword"
+                secureTextEntry
+                onChangeText={(val) => setPassword(val)}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.inpViewPass}>
+              <TextInput
+                style={styles.inputPass}
+                onChangeText={(val) => setPassword(val)}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
         <View style={styles.forgotwordview}>
           <TouchableOpacity
@@ -191,6 +223,24 @@ const styles = StyleSheet.create({
   },
   passView: {
     marginTop: 30,
+  },
+  inpViewPass: {
+    flexDirection: "row",
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    borderWidth: 1,
+    width: 328,
+    height: 48,
+    borderRadius: 5,
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  inputPass: {
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    width: 300,
+    height: 44,
+    paddingLeft: 5,
   },
   forgotword: {
     fontFamily: "Montserrat",

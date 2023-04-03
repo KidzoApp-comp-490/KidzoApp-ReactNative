@@ -17,6 +17,8 @@ import { register, getUserUId } from "../../db/auth/auth";
 import { auth, provider } from "../../db/Config";
 import { Addusers } from "../../db/Edit/users";
 import { signInWithPopup } from "firebase/auth";
+import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
+import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignUp({ navigation }) {
   const [value, setValue] = useState("");
@@ -36,7 +38,7 @@ export default function SignUp({ navigation }) {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("Female");
 
   const checkDate = () => {
     if (
@@ -89,6 +91,12 @@ export default function SignUp({ navigation }) {
     }
   };
 
+  const [icon, setIcon] = useState(true);
+  const clickEye = () => {
+    icon ? setIcon(false) : setIcon(true);
+  };
+  let imageSource = icon ? PassIconInV : PassIconV;
+
   return (
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -121,19 +129,38 @@ export default function SignUp({ navigation }) {
           </View>
         </View>
         <View style={styles.PassView}>
-          <Text style={styles.inpText}>Password</Text>
-          <View style={styles.inpView}>
-            <TextInput
-              style={styles.input}
-              autoCapitalize="none"
-              autoCorrect={false}
-              textContentType="newPassword"
-              secureTextEntry
-              onChangeText={(val) => {
-                setPassword(val);
-              }}
-            />
-          </View>
+          <Text style={styles.passText}>Password</Text>
+          {icon ? (
+            <View style={styles.inpViewPass}>
+              <TextInput
+                style={styles.inputPass}
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="newPassword"
+                secureTextEntry
+                onChangeText={(val) => setPassword(val)}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.inpViewPass}>
+              <TextInput
+                style={styles.inputPass}
+                onChangeText={(val) => setPassword(val)}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
         <View style={styles.flNameView}>
           <View style={styles.fNameView}>
@@ -180,7 +207,7 @@ export default function SignUp({ navigation }) {
                 value="first"
                 status={checked === "first" ? "checked" : "unchecked"}
                 onPress={() => {
-                  setGender("Female"), setChecked("first");
+                  setChecked("first");
                 }}
                 color="#FFA8C5"
                 uncheckedColor="#FFA8C5"
@@ -327,6 +354,32 @@ const styles = StyleSheet.create({
   },
   PassView: {
     marginTop: 32,
+  },
+  passText: {
+    fontSize: 14,
+    fontFamily: "Montserrat",
+    color: "#0B3B63A6",
+    fontWeight: "500",
+    marginBottom: 5,
+    opacity: 0.65,
+  },
+  inpViewPass: {
+    flexDirection: "row",
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    borderWidth: 1,
+    width: 328,
+    height: 48,
+    borderRadius: 5,
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  inputPass: {
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    width: 300,
+    height: 44,
+    paddingLeft: 5,
   },
   flNameView: {
     flexDirection: "row",
