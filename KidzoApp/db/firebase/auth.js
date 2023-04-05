@@ -8,6 +8,7 @@ import {
   signInWithCredential,
   FacebookAuthProvider,
   signOut,
+  getAuth,
 } from "firebase/auth";
 
 // Listen for authentication state to change.
@@ -32,6 +33,7 @@ async function SignOut() {
 
 async function getUserUId() {
   if (auth.currentUser != null) {
+    console.log("here", auth.currentUser.uid);
     return auth.currentUser.uid;
   } else {
     return null;

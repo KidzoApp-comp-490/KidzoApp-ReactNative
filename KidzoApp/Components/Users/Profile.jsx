@@ -8,6 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
+import { useState } from "react";
+import { getUserUId } from "../../db/firebase/auth";
+import { getUserById } from "../../db/firebase/users";
 import ProfileIcon from "../../assets/Profile/Group69.png";
 import EditIcon from "../../assets/Profile/material-symbols_edit-rounded.png";
 import PostIcon from "../../assets/Profile/image3.png";
@@ -16,6 +19,19 @@ import Comment from "../../assets/Profile/comment.png";
 import { StatusBar } from "expo-status-bar";
 
 export default function Profile({ navigation }) {
+
+  const [firstname, SetFName] = useState("");
+  const [lastname, SetLName] = useState("");
+
+  React.useEffect(() => {
+    getUserUId().then((id) => {
+      console.log(id);
+      getUserById(id).then((user) => {
+        SetFName(user[0].fName);
+        SetLName(user[0].lName);
+      });
+    });
+  }, []);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView
@@ -26,7 +42,7 @@ export default function Profile({ navigation }) {
         </View>
         <View style={styles.Section1}>
           <Image source={ProfileIcon} style={{ width: 155, height: 155 }} />
-          <Text style={styles.UserName}>Ann Larry</Text>
+          <Text style={styles.UserName}>{firstname} {lastname}</Text>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("ProfileSettings");

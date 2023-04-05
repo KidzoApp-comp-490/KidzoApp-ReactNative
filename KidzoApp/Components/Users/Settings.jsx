@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Iconset from "../../assets/Home/Settings.png";
-import { SignOut } from "../../db/auth/auth";
+import { SignOut } from "../../db/firebase/auth";
 
 export default function Settings({ navigation }) {
   return (

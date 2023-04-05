@@ -12,7 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/SignIn/Kidzo.png";
 import Or from "../../assets/SignIn/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
-import { login } from "../../db/auth/auth";
+import { login } from "../../db/firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../db/Config";
 
