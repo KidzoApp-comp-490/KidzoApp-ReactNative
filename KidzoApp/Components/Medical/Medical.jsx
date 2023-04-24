@@ -8,7 +8,7 @@ export default function Medical({ text1, day, month, year }) {
       <View style={styles.bordView}>
         <Text style={styles.statment1}> {text1}</Text>
         <Text style={styles.statment2}>
-          {day} {month}., {year}
+          {day}-{month}-{year}
         </Text>
         <View style={styles.imageView}>
           <TouchableOpacity>
