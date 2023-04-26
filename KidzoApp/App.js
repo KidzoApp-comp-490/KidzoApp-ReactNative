@@ -24,6 +24,8 @@ import Report from "./Components/Users/Report";
 import Info from "./Components/Users/Info";
 import ProfileSettings from "./Components/Users/ProfileSettings";
 import MomsCommunityItem from "./Components/Community/MomsCommunityItem";
+import SignupAs from "./Components/Users/SignupAs";
+import SignUpDoctor from "./Components/Users/SignUpDoctor";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -90,8 +92,18 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="SignupAs"
+          component={SignupAs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="SignUp"
           component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUpDoctor"
+          component={SignUpDoctor}
           options={{ headerShown: false }}
         />
         <Stack.Screen

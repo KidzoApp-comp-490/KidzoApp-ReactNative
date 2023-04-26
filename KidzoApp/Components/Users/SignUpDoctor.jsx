@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/SignIn/Kidzo.png";
-import { RadioButton } from "react-native-paper";
+
 import OR from "../../assets/SignUp/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
 import { register, getUserUId } from "../../db/auth/auth";
@@ -18,7 +18,7 @@ import { auth, provider } from "../../db/Config";
 import { Addusers } from "../../db/Edit/users";
 import { signInWithPopup } from "firebase/auth";
 
-export default function SignUp({ navigation }) {
+export default function SignUpDoctor({ navigation }) {
   const [value, setValue] = useState("");
   const SingUpWithGoogle = () => {
     signInWithPopup(auth, provider).then((data) => {
@@ -33,10 +33,8 @@ export default function SignUp({ navigation }) {
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [phone, setPhone] = useState("");
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-  const [gender, setGender] = useState("");
+ 
+
 
   const checkDate = () => {
     if (
@@ -44,10 +42,9 @@ export default function SignUp({ navigation }) {
       password.length === 0 &&
       fName.length === 0 &&
       lName.length === 0 &&
-      phone.length === 0 &&
-      day.length === 0 &&
-      month.length === 0 &&
-      year.length === 0
+      phone.length === 0 
+      
+      
     ) {
       alert("invalid information");
     } else if (password.length < 8) {
@@ -66,10 +63,8 @@ export default function SignUp({ navigation }) {
               fName: fName,
               lName: lName,
               phone: phone,
-              day: day,
-              month: month,
-              year: year,
-              gender: gender,
+              
+              
             });
           });
         })
@@ -97,7 +92,7 @@ export default function SignUp({ navigation }) {
         </View>
         <View style={styles.signUpTextView}>
           <Text style={styles.signUpText}>
-            Sign Up{"\n"}
+            Sign Up As Doctor{"\n"}
             <Text style={styles.accountText}>Already have account? </Text>
             <TouchableOpacity
               onPress={() => {
@@ -160,7 +155,7 @@ export default function SignUp({ navigation }) {
           </View>
         </View>
         <View style={styles.PhoneView}>
-          <Text style={styles.inpText}>Phone number</Text>
+          <Text style={styles.inpText}>Clinic Phone number</Text>
           <View style={styles.inpView}>
             <TextInput
               style={styles.input}
@@ -171,38 +166,19 @@ export default function SignUp({ navigation }) {
             />
           </View>
         </View>
-        <View style={styles.Gender}>
-          <Text style={styles.GenderTxt}>Gender</Text>
-          <View style={styles.FMView}>
-            <View style={styles.FemaleView}>
-              <Text style={styles.FemaleTxt}>Female</Text>
-              <RadioButton
-                value="first"
-                status={checked === "first" ? "checked" : "unchecked"}
-                onPress={() => {
-                  setGender("Female"), setChecked("first");
-                }}
-                color="#FFA8C5"
-                uncheckedColor="#FFA8C5"
-              />
-            </View>
-            <View style={styles.maleView}>
-              <Text style={styles.maleTxt}>Male</Text>
-              <RadioButton
-                value="second"
-                status={checked === "second" ? "checked" : "unchecked"}
-                onPress={() => {
-                  setChecked("second"), setGender("male");
-                }}
-                color="#FFA8C5"
-                uncheckedColor="#FFA8C5"
-              />
-            </View>
+        <View style={styles.AdressView}>
+        <Text style={styles.inpText}>Clinic Adress</Text>
+          <View style={styles.inpView}>
+            <TextInput
+              style={styles.Adressinput}
+              
+            />
           </View>
+
         </View>
 
         <View style={styles.PhoneView}>
-          <Text style={styles.inpText}>Age</Text>
+          <Text style={styles.inpText}>Session price</Text>
           <View style={styles.inpView}>
             <TextInput
               style={styles.input}
@@ -213,41 +189,7 @@ export default function SignUp({ navigation }) {
             />
           </View>
         </View>
-        {/* <View style={styles.birthdayView}>
-          <Text style={styles.birthdayTxt}>Date of birth</Text>
-          <View style={styles.DMYView}>
-            <View style={styles.dayInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Day"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setDay(val);
-                }}
-              />
-            </View>
-            <View style={styles.monthInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Month"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setMonth(val);
-                }}
-              />
-            </View>
-            <View style={styles.yearInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Year"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setYear(val);
-                }}
-              />
-            </View>
-          </View>
-        </View> */}
+       
         <View style={styles.buttonview}>
           <TouchableOpacity style={styles.button} onPress={checkDate}>
             <View style={styles.button2}>
@@ -337,6 +279,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#FFA8C5",
   },
+  AdressView: {
+    marginTop: 32,
+  },
+  Adressinput: {
+    backgroundColor: "#FFFFFF",
+    height: 144,
+    borderRadius: 5,
+    width: 328,
+    borderWidth: 1,
+    borderColor: "#FFA8C5",
+  },
   PassView: {
     marginTop: 32,
   },
@@ -383,88 +336,7 @@ const styles = StyleSheet.create({
   PhoneView: {
     marginTop: 32,
   },
-  Gender: {
-    marginHorizontal: 16,
-    marginTop: 32,
-  },
-  GenderTxt: {
-    marginBottom: 5,
-    fontSize: 14,
-    fontFamily: "Montserrat",
-    color: "#0B3B63A6",
-    fontWeight: "500",
-    opacity: 0.65,
-  },
-  FMView: {
-    flexDirection: "row",
-  },
-  FemaleView: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 156,
-    height: 48,
-    borderWidth: 1,
-    borderColor: "#FFA8C5",
-    borderRadius: 5,
-    marginRight: 16,
-  },
-  FemaleTxt: {
-    fontSize: 14,
-    fontFamily: "Montserrat",
-    color: "#0B3B63A6",
-    fontWeight: "500",
-    marginLeft: 14,
-    marginRight: 59,
-  },
-  maleView: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 156,
-    height: 48,
-    borderWidth: 1,
-    borderColor: "#FFA8C5",
-    borderRadius: 5,
-  },
-  maleTxt: {
-    fontSize: 14,
-    fontFamily: "Montserrat",
-    color: "#0B3B63A6",
-    fontWeight: "500",
-    marginLeft: 14,
-    marginRight: 77,
-  },
-  birthdayView: {
-    marginTop: 32,
-  },
-  birthdayTxt: {
-    fontSize: 14,
-    fontFamily: "Montserrat",
-    color: "#0B3B63A6",
-    fontWeight: "500",
-    opacity: 0.65,
-    marginBottom: 5,
-  },
-  DMYView: {
-    flexDirection: "row",
-  },
-  DMYInp: {
-    width: 99.7,
-    height: 48,
-    borderWidth: 1,
-    borderColor: "#FFA8C5",
-    borderRadius: 5,
-    paddingLeft: 14,
-    color: "#0B3B63",
-  },
-  dayInpView: {
-    width: 99.7,
-    height: 48,
-    justifyContent: "center",
-    marginRight: 14.95,
-  },
-  monthInpView: {
-    marginRight: 13.65,
-  },
+  
   buttonview: {
     marginTop: 30,
   },

@@ -128,7 +128,7 @@ export default function SignIn({ navigation }) {
             Don't have an account?
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("SignUp");
+                navigation.navigate("SignupAs");
               }}
             >
               <Text style={styles.uptext}>Sign up</Text>
