@@ -13,9 +13,9 @@ import Logo from "../../assets/SignIn/Kidzo.png";
 import { RadioButton } from "react-native-paper";
 import OR from "../../assets/SignUp/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
-import { register, getUserUId } from "../../db/auth/auth";
+import { register, getUserUId } from "../../db/firebase/auth";
 import { auth, provider } from "../../db/Config";
-import { Addusers } from "../../db/Edit/users";
+import { Addusers } from "../../db/firebase/users";
 import { signInWithPopup } from "firebase/auth";
 import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
 import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
@@ -26,7 +26,7 @@ export default function SignUp({ navigation }) {
       navigation.navigate("GoogleInfo");
       getUserUId().then((id) => {
         Addusers({
-          id: id,
+          uid: id,
           email: data.user.email,
           fName: fName,
           lName: lName,

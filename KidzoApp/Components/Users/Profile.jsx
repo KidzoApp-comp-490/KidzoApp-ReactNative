@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import ProfileIcon from "../../assets/Profile/Group69.png";
+import { useState } from "react";
+import { getUserUId } from "../../db/firebase/auth";
+import { getUserById, subscribe } from "../../db/firebase/users";
 import EditIcon from "../../assets/Profile/material-symbols_edit-rounded.png";
 import PostIcon from "../../assets/Profile/image3.png";
 import Heart from "../../assets/Profile/Group.png";
@@ -16,6 +18,21 @@ import Comment from "../../assets/Profile/comment.png";
 import { StatusBar } from "expo-status-bar";
 
 export default function Profile({ navigation }) {
+  const [firstname, SetFName] = useState("");
+  const [lastname, SetLName] = useState("");
+  const [image, setImage] = useState("");
+  React.useEffect(() => {
+    const unsubscribe = subscribe(({ change, snapshot }) => {
+      getUserUId().then((id) => {
+        console.log(id);
+        getUserById(id).then((user) => {
+          SetFName(user[0].fName);
+          SetLName(user[0].lName);
+          setImage(user[0].image);
+        });
+      });
+    });
+  }, []);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView
@@ -25,8 +42,15 @@ export default function Profile({ navigation }) {
           <Text style={styles.ProfileTxt}>YOUR PROFILE</Text>
         </View>
         <View style={styles.Section1}>
-          <Image source={ProfileIcon} style={{ width: 155, height: 155 }} />
-          <Text style={styles.UserName}>Ann Larry</Text>
+          <View style={{ borderRadius: 100, overflow: "hidden" }}>
+            <Image
+              source={{ uri: image }}
+              style={{ width: 155, height: 155 }}
+            />
+          </View>
+          <Text style={styles.UserName}>
+            {firstname} {lastname}
+          </Text>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("ProfileSettings");

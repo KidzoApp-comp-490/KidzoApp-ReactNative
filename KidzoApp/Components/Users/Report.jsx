@@ -13,8 +13,13 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Frame from "../../assets/Report/Frame.png";
 import Icon from "../../assets/Report/material-symbols_add-circle-outline-rounded.png";
-import { addMedicineReport, getMedical, deleteMedicineReport, getMedicineReport } from '../../db/medicineReport'
-import { getUserUId } from '../../db/auth/auth'
+import {
+  addMedicineReport,
+  getMedical,
+  deleteMedicineReport,
+  getMedicineReport,
+} from "../../db/medicineReport";
+import { getUserUId } from "../../db/firebase/auth";
 export default function Report({ navigation }) {
   const [title, setTitle] = useState("");
   const [day, setDay] = useState("");
@@ -22,7 +27,7 @@ export default function Report({ navigation }) {
   const [year, setYear] = useState("");
   const [desc, setDes] = useState("");
   const [currentId, setCurrentId] = useState("");
-  const handelId = getUserUId().then(val => {
+  const handelId = getUserUId().then((val) => {
     setCurrentId(val);
   });
 
@@ -52,7 +57,10 @@ export default function Report({ navigation }) {
             <Text style={styles.star}>*</Text>
           </View>
           <View style={styles.inpView}>
-            <TextInput style={styles.input} onChangeText={(val) => (setTitle(val))} />
+            <TextInput
+              style={styles.input}
+              onChangeText={(val) => setTitle(val)}
+            />
           </View>
         </View>
         <View style={styles.birthdayView}>
@@ -66,7 +74,7 @@ export default function Report({ navigation }) {
                 style={styles.DMYInp}
                 placeholder="Day"
                 keyboardType="number-pad"
-                onChangeText={(val) => (setDay(val))}
+                onChangeText={(val) => setDay(val)}
               />
             </View>
             <View style={styles.monthInpView}>
@@ -74,7 +82,7 @@ export default function Report({ navigation }) {
                 style={styles.DMYInp}
                 placeholder="Month"
                 keyboardType="number-pad"
-                onChangeText={(val) => (setMonth(val))}
+                onChangeText={(val) => setMonth(val)}
               />
             </View>
             <View style={styles.yearInpView}>
@@ -82,7 +90,7 @@ export default function Report({ navigation }) {
                 style={styles.DMYInp}
                 placeholder="Year"
                 keyboardType="number-pad"
-                onChangeText={(val) => (setYear(val))}
+                onChangeText={(val) => setYear(val)}
               />
             </View>
           </View>
@@ -90,7 +98,12 @@ export default function Report({ navigation }) {
         <View style={styles.DesView}>
           <Text style={styles.Des}>Add Description</Text>
           <View style={styles.inputView}>
-            <TextInput style={styles.inp} multiline scrollEnabled onChangeText={(val) => (setDes(val))} />
+            <TextInput
+              style={styles.inp}
+              multiline
+              scrollEnabled
+              onChangeText={(val) => setDes(val)}
+            />
           </View>
         </View>
         <View style={styles.iconView}>
@@ -101,49 +114,37 @@ export default function Report({ navigation }) {
               let isYear = /^\d+$/.test(year);
               if (
                 title.length > 0 &&
-                isMonth && month >= 1 &&
+                isMonth &&
+                month >= 1 &&
                 month <= 12 &&
                 isYear &&
                 year >= 2020 &&
                 isDay &&
                 day >= 1 &&
                 day <= 31
-
               ) {
                 navigation.navigate("TabFun");
                 handelId;
-                console.log(title, " ", day, " ", month, " ", year, " ", desc)
+                console.log(title, " ", day, " ", month, " ", year, " ", desc);
                 addMedicineReport({
                   day: day,
                   description: desc,
                   month: month,
                   title: title,
                   year: year,
-                  currentUserid: currentId
+                  currentUserid: currentId,
                 });
               }
               if (!(title.length > 0)) {
-                alert("Title can not be empty")
-              }
-              else if (!(
-                isMonth &&
-                month >= 1 &&
-                month <= 12)) {
-                alert("Month should be between 1 - 12")
-              }
-              else if (!(
-                isDay &&
-                day >= 1 &&
-                day <= 31)) {
-                alert("Day should be between 1 - 31")
-              }
-              else if (!(
-                isYear &&
-                year >= 2020)) {
-                alert("Year should be greater than 2020")
-              }
-              else {
-                alert("Done!!")
+                alert("Title can not be empty");
+              } else if (!(isMonth && month >= 1 && month <= 12)) {
+                alert("Month should be between 1 - 12");
+              } else if (!(isDay && day >= 1 && day <= 31)) {
+                alert("Day should be between 1 - 31");
+              } else if (!(isYear && year >= 2020)) {
+                alert("Year should be greater than 2020");
+              } else {
+                alert("Done!!");
               }
             }}
           >

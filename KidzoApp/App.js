@@ -16,18 +16,18 @@ import CommunityIcon from "./assets/Home/comm.png";
 import SettingIcon from "./assets/Home/Settings.png";
 import Profile from "./Components/Users/Profile";
 import Settings from "./Components/Users/Settings";
-// import MomsCommunity from "./Components/MomsCommunity";
 import ResetPass from "./Components/Users/ResetPass";
-// import Medical from "./Components/Medical/Medical";
 import MedicalItem from "./Components/Medical/MedicalItem";
 import Report from "./Components/Users/Report";
 import Info from "./Components/Users/Info";
 import ProfileSettings from "./Components/Users/ProfileSettings";
 import MomsCommunityItem from "./Components/Community/MomsCommunityItem";
+import GoogleInfo from "./Components/Users/GoogleInfo";
 import SignupAs from "./Components/Users/SignupAs";
 import SignUpDoctor from "./Components/Users/SignUpDoctor";
 import Changepass from "./Components/Users/Changepass";
-import GoogleInfo from "./Components/Users/GoogleInfo";
+import Doctors from "./Components/Doctors/Doctors";
+import ChatWithDoc from "./Components/Chat/ChatWithDoc";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -109,11 +109,6 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="GoogleInfo"
-          component={GoogleInfo}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="Home"
           component={Home}
           options={{ headerShown: false }}
@@ -139,8 +134,8 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Changepass"
-          component={Changepass}
+          name="GoogleInfo"
+          component={GoogleInfo}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -166,6 +161,21 @@ export default function App() {
         <Stack.Screen
           name="ProfileSettings"
           component={ProfileSettings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Changepass"
+          component={Changepass}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Doctors"
+          component={Doctors}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ChatWithDoc"
+          component={ChatWithDoc}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

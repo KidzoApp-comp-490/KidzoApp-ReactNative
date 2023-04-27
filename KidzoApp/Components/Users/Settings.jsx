@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import Iconset from "../../assets/Home/Settings.png";
-import { SignOut } from "../../db/auth/auth";
+import { SignOut } from "../../db/firebase/auth";
 
 export default function Settings({ navigation }) {
   return (
@@ -41,9 +41,10 @@ export default function Settings({ navigation }) {
           <Image source={Iconset} style={styles.icon2} />
         </View>
         <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Changepass");
-        }}>
+          onPress={() => {
+            navigation.navigate("Changepass");
+          }}
+        >
           <Text style={styles.text}>Change your password</Text>
         </TouchableOpacity>
       </View>

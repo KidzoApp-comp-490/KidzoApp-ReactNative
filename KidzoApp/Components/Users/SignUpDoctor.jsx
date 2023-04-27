@@ -13,18 +13,14 @@ import Logo from "../../assets/SignIn/Kidzo.png";
 
 import OR from "../../assets/SignUp/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
-import { register, getUserUId } from "../../db/auth/auth";
+import { register, getUserUId } from "../../db/firebase/auth";
 import { auth, provider } from "../../db/Config";
-import { Addusers } from "../../db/Edit/users";
+import { Addusers } from "../../db/firebase/users";
 import { signInWithPopup } from "firebase/auth";
 
 export default function SignUpDoctor({ navigation }) {
-  const [value, setValue] = useState("");
   const SingUpWithGoogle = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
+    signInWithPopup(auth, provider).then((data) => {});
   };
 
   const [checked, setChecked] = useState("first");
@@ -33,8 +29,6 @@ export default function SignUpDoctor({ navigation }) {
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [phone, setPhone] = useState("");
- 
-
 
   const checkDate = () => {
     if (
@@ -42,9 +36,7 @@ export default function SignUpDoctor({ navigation }) {
       password.length === 0 &&
       fName.length === 0 &&
       lName.length === 0 &&
-      phone.length === 0 
-      
-      
+      phone.length === 0
     ) {
       alert("invalid information");
     } else if (password.length < 8) {
@@ -63,8 +55,6 @@ export default function SignUpDoctor({ navigation }) {
               fName: fName,
               lName: lName,
               phone: phone,
-              
-              
             });
           });
         })
@@ -167,14 +157,10 @@ export default function SignUpDoctor({ navigation }) {
           </View>
         </View>
         <View style={styles.AdressView}>
-        <Text style={styles.inpText}>Clinic Adress</Text>
+          <Text style={styles.inpText}>Clinic Adress</Text>
           <View style={styles.inpView}>
-            <TextInput
-              style={styles.Adressinput}
-              
-            />
+            <TextInput style={styles.Adressinput} />
           </View>
-
         </View>
 
         <View style={styles.PhoneView}>
@@ -183,13 +169,13 @@ export default function SignUpDoctor({ navigation }) {
             <TextInput
               style={styles.input}
               keyboardType="number-pad"
-            //   onChangeText={(val) => {
-            //     setPhone(val);
-            //   }}
+              //   onChangeText={(val) => {
+              //     setPhone(val);
+              //   }}
             />
           </View>
         </View>
-       
+
         <View style={styles.buttonview}>
           <TouchableOpacity style={styles.button} onPress={checkDate}>
             <View style={styles.button2}>
@@ -201,14 +187,10 @@ export default function SignUpDoctor({ navigation }) {
           <Image source={OR} style={styles.or} />
         </View>
         <View style={styles.SingUpWithGoogleView}>
-          {value ? (
-            navigation.navigate("TabFun")
-          ) : (
-            <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
-              <Image source={Google} style={styles.GoogleIcon} />
-              <Text style={styles.GoogleText}>SingUp with Google</Text>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
+            <Image source={Google} style={styles.GoogleIcon} />
+            <Text style={styles.GoogleText}>SingUp with Google</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <StatusBar style="auto" />
@@ -278,6 +260,7 @@ const styles = StyleSheet.create({
     width: 328,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   AdressView: {
     marginTop: 32,
@@ -289,6 +272,7 @@ const styles = StyleSheet.create({
     width: 328,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   PassView: {
     marginTop: 32,
@@ -312,6 +296,7 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 5,
     borderWidth: 1,
+    paddingLeft: 5,
     borderColor: "#FFA8C5",
   },
   lNameView: {
@@ -331,12 +316,13 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 5,
     borderWidth: 1,
+    paddingLeft: 5,
     borderColor: "#FFA8C5",
   },
   PhoneView: {
     marginTop: 32,
   },
-  
+
   buttonview: {
     marginTop: 30,
   },

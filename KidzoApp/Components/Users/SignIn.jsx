@@ -12,7 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/SignIn/Kidzo.png";
 import Or from "../../assets/SignIn/OR.png";
 import Google from "../../assets/SignIn/logos_google-icon.png";
-import { login } from "../../db/auth/auth";
+import { login } from "../../db/firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../db/Config";
 import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
@@ -20,7 +20,9 @@ import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignIn({ navigation }) {
   const SingInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((data) => {});
+    signInWithPopup(auth, provider).then(() => {
+      navigation.navigate("TabFun");
+    });
   };
 
   const [email, setEmail] = useState("");
@@ -88,12 +90,13 @@ export default function SignIn({ navigation }) {
         <View style={styles.passView}>
           <Text style={styles.inpText}>Password</Text>
           {icon ? (
-            <View style={styles.inpPassView}>
+            <View style={styles.inpViewPass}>
               <TextInput
                 style={styles.inputPass}
-                secureTextEntry
                 autoCapitalize="none"
                 autoCorrect={false}
+                textContentType="newPassword"
+                secureTextEntry
                 onChangeText={(val) => setPassword(val)}
               />
               <TouchableOpacity onPress={clickEye}>
@@ -104,10 +107,8 @@ export default function SignIn({ navigation }) {
               </TouchableOpacity>
             </View>
           ) : (
-            <View style={styles.inpPassView}>
+            <View style={styles.inpViewPass}>
               <TextInput
-                autoCapitalize="none"
-                autoCorrect={false}
                 style={styles.inputPass}
                 onChangeText={(val) => setPassword(val)}
               />
@@ -217,19 +218,22 @@ const styles = StyleSheet.create({
   passView: {
     marginTop: 30,
   },
-  inpPassView: {
+  inpViewPass: {
     flexDirection: "row",
-    alignItems: "center",
     backgroundColor: "#ffff",
     borderColor: "#FFA8C5",
     borderWidth: 1,
     width: 328,
     height: 48,
     borderRadius: 5,
+    alignItems: "center",
+    overflow: "hidden",
   },
   inputPass: {
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
     width: 300,
-    height: 42,
+    height: 44,
     paddingLeft: 5,
   },
   forgotword: {

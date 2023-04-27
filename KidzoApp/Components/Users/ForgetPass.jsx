@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,8 +13,10 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/ForgotPass/Logo 2.png";
 import Frame from "../../assets/ForgotPass/Frame.png";
+import { forgetPass } from "../../db/firebase/auth";
 
 export default function Forget({ navigation }) {
+  const [email, setEmail] = useState("");
   return (
     <View style={styles.container}>
       <View style={styles.logoView}>
@@ -36,14 +38,17 @@ export default function Forget({ navigation }) {
       <View style={styles.emailView}>
         <Text style={styles.inpText}>E-mail</Text>
         <View style={styles.inpView}>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={setEmail} />
         </View>
       </View>
       <View style={styles.buttonview}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("Confirm");
+            forgetPass(email).then(() => {
+              alert("Email sent");
+              navigation.navigate("SignIn");
+            });
           }}
         >
           <View style={styles.button2}>
@@ -113,6 +118,7 @@ const styles = StyleSheet.create({
     width: 328,
     height: 48,
     borderRadius: 5,
+    paddingLeft: 5,
   },
   buttonview: {
     marginTop: 30,
