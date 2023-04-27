@@ -15,14 +15,12 @@ import Google from "../../assets/SignIn/logos_google-icon.png";
 import { login } from "../../db/auth/auth";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../db/Config";
+import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
+import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignIn({ navigation }) {
-  const [value, setValue] = useState("");
   const SingInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
+    signInWithPopup(auth, provider).then((data) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -62,6 +60,12 @@ export default function SignIn({ navigation }) {
         });
   };
 
+  const [icon, setIcon] = useState(true);
+  const clickEye = () => {
+    icon ? setIcon(false) : setIcon(true);
+  };
+  let imageSource = icon ? PassIconInV : PassIconV;
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -83,13 +87,38 @@ export default function SignIn({ navigation }) {
         </View>
         <View style={styles.passView}>
           <Text style={styles.inpText}>Password</Text>
-          <View style={styles.inpView}>
-            <TextInput
-              style={styles.input}
-              secureTextEntry
-              onChangeText={(val) => setPassword(val)}
-            />
-          </View>
+          {icon ? (
+            <View style={styles.inpPassView}>
+              <TextInput
+                style={styles.inputPass}
+                secureTextEntry
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={(val) => setPassword(val)}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.inpPassView}>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                style={styles.inputPass}
+                onChangeText={(val) => setPassword(val)}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
         <View style={styles.forgotwordview}>
           <TouchableOpacity
@@ -112,16 +141,12 @@ export default function SignIn({ navigation }) {
         </View>
 
         <View style={styles.SinginWithGoogleView}>
-          {value ? (
-            navigation.navigate("TabFun")
-          ) : (
-            <TouchableOpacity style={styles.touch} onPress={SingInWithGoogle}>
-              <Image source={Google} style={styles.GoogleIcon} />
-              <View style={styles.GoogleTextView}>
-                <Text style={styles.GoogleText}>Sing in with Google</Text>
-              </View>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity style={styles.touch} onPress={SingInWithGoogle}>
+            <Image source={Google} style={styles.GoogleIcon} />
+            <View style={styles.GoogleTextView}>
+              <Text style={styles.GoogleText}>Sing in with Google</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.uptextView}>
           <Text style={styles.accountcreate}>
@@ -187,9 +212,25 @@ const styles = StyleSheet.create({
     width: 328,
     height: 48,
     borderRadius: 5,
+    paddingLeft: 5,
   },
   passView: {
     marginTop: 30,
+  },
+  inpPassView: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    borderWidth: 1,
+    width: 328,
+    height: 48,
+    borderRadius: 5,
+  },
+  inputPass: {
+    width: 300,
+    height: 42,
+    paddingLeft: 5,
   },
   forgotword: {
     fontFamily: "Montserrat",

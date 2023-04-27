@@ -27,6 +27,7 @@ import MomsCommunityItem from "./Components/Community/MomsCommunityItem";
 import SignupAs from "./Components/Users/SignupAs";
 import SignUpDoctor from "./Components/Users/SignUpDoctor";
 import Changepass from "./Components/Users/Changepass";
+import GoogleInfo from "./Components/Users/GoogleInfo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -105,6 +106,11 @@ export default function App() {
         <Stack.Screen
           name="SignUpDoctor"
           component={SignUpDoctor}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="GoogleInfo"
+          component={GoogleInfo}
           options={{ headerShown: false }}
         />
         <Stack.Screen

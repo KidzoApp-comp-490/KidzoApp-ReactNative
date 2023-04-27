@@ -17,13 +17,25 @@ import { register, getUserUId } from "../../db/auth/auth";
 import { auth, provider } from "../../db/Config";
 import { Addusers } from "../../db/Edit/users";
 import { signInWithPopup } from "firebase/auth";
+import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
+import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignUp({ navigation }) {
-  const [value, setValue] = useState("");
   const SingUpWithGoogle = () => {
     signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
+      navigation.navigate("GoogleInfo");
+      getUserUId().then((id) => {
+        Addusers({
+          id: id,
+          email: data.user.email,
+          fName: fName,
+          lName: lName,
+          phone: phone,
+          gender: "",
+          age: age,
+          image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+        });
+      });
     });
   };
 
@@ -33,10 +45,8 @@ export default function SignUp({ navigation }) {
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [phone, setPhone] = useState("");
-  const [day, setDay] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
   const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
 
   const checkDate = () => {
     if (
@@ -45,13 +55,23 @@ export default function SignUp({ navigation }) {
       fName.length === 0 &&
       lName.length === 0 &&
       phone.length === 0 &&
-      day.length === 0 &&
-      month.length === 0 &&
-      year.length === 0
+      age.length === 0
     ) {
       alert("invalid information");
+    } else if (email.length === 0) {
+      alert("Please enter your email");
+    } else if (!email.includes("@")) {
+      alert("invalid email");
     } else if (password.length < 8) {
       alert("Password must be at least 8 characters");
+    } else if (fName.length === 0) {
+      alert("Please enter your first name");
+    } else if (lName.length === 0) {
+      alert("Please enter your last name");
+    } else if (phone.length === 0) {
+      alert("Please enter your phone");
+    } else if (age.length === 0) {
+      alert("Please enter your age");
     } else {
       register(email, password)
         .then(() => {
@@ -66,10 +86,9 @@ export default function SignUp({ navigation }) {
               fName: fName,
               lName: lName,
               phone: phone,
-              day: day,
-              month: month,
-              year: year,
               gender: gender,
+              age: age,
+              image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             });
           });
         })
@@ -88,6 +107,12 @@ export default function SignUp({ navigation }) {
         });
     }
   };
+
+  const [icon, setIcon] = useState(true);
+  const clickEye = () => {
+    icon ? setIcon(false) : setIcon(true);
+  };
+  let imageSource = icon ? PassIconInV : PassIconV;
 
   return (
     <View style={styles.body}>
@@ -122,18 +147,44 @@ export default function SignUp({ navigation }) {
         </View>
         <View style={styles.PassView}>
           <Text style={styles.inpText}>Password</Text>
-          <View style={styles.inpView}>
-            <TextInput
-              style={styles.input}
-              autoCapitalize="none"
-              autoCorrect={false}
-              textContentType="newPassword"
-              secureTextEntry
-              onChangeText={(val) => {
-                setPassword(val);
-              }}
-            />
-          </View>
+          {icon ? (
+            <View style={styles.inpPassView}>
+              <TextInput
+                style={styles.inputPass}
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="newPassword"
+                secureTextEntry
+                onChangeText={(val) => {
+                  setPassword(val);
+                }}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.inpPassView}>
+              <TextInput
+                style={styles.inputPass}
+                autoCapitalize="none"
+                autoCorrect={false}
+                textContentType="newPassword"
+                onChangeText={(val) => {
+                  setPassword(val);
+                }}
+              />
+              <TouchableOpacity onPress={clickEye}>
+                <Image
+                  source={imageSource}
+                  style={{ width: 14, height: 14, marginHorizontal: 5 }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
         <View style={styles.flNameView}>
           <View style={styles.fNameView}>
@@ -207,47 +258,12 @@ export default function SignUp({ navigation }) {
             <TextInput
               style={styles.input}
               keyboardType="number-pad"
-            //   onChangeText={(val) => {
-            //     setPhone(val);
-            //   }}
+              onChangeText={(val) => {
+                setAge(val);
+              }}
             />
           </View>
         </View>
-        {/* <View style={styles.birthdayView}>
-          <Text style={styles.birthdayTxt}>Date of birth</Text>
-          <View style={styles.DMYView}>
-            <View style={styles.dayInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Day"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setDay(val);
-                }}
-              />
-            </View>
-            <View style={styles.monthInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Month"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setMonth(val);
-                }}
-              />
-            </View>
-            <View style={styles.yearInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Year"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setYear(val);
-                }}
-              />
-            </View>
-          </View>
-        </View> */}
         <View style={styles.buttonview}>
           <TouchableOpacity style={styles.button} onPress={checkDate}>
             <View style={styles.button2}>
@@ -259,14 +275,10 @@ export default function SignUp({ navigation }) {
           <Image source={OR} style={styles.or} />
         </View>
         <View style={styles.SingUpWithGoogleView}>
-          {value ? (
-            navigation.navigate("TabFun")
-          ) : (
-            <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
-              <Image source={Google} style={styles.GoogleIcon} />
-              <Text style={styles.GoogleText}>SingUp with Google</Text>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
+            <Image source={Google} style={styles.GoogleIcon} />
+            <Text style={styles.GoogleText}>SingUp with Google</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <StatusBar style="auto" />
@@ -336,9 +348,25 @@ const styles = StyleSheet.create({
     width: 328,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   PassView: {
     marginTop: 32,
+  },
+  inpPassView: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffff",
+    borderColor: "#FFA8C5",
+    borderWidth: 1,
+    width: 328,
+    height: 48,
+    borderRadius: 5,
+  },
+  inputPass: {
+    width: 300,
+    height: 42,
+    paddingLeft: 5,
   },
   flNameView: {
     flexDirection: "row",
@@ -360,6 +388,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   lNameView: {
     marginLeft: 16,
@@ -379,6 +408,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#FFA8C5",
+    paddingLeft: 5,
   },
   PhoneView: {
     marginTop: 32,
@@ -432,38 +462,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginLeft: 14,
     marginRight: 77,
-  },
-  birthdayView: {
-    marginTop: 32,
-  },
-  birthdayTxt: {
-    fontSize: 14,
-    fontFamily: "Montserrat",
-    color: "#0B3B63A6",
-    fontWeight: "500",
-    opacity: 0.65,
-    marginBottom: 5,
-  },
-  DMYView: {
-    flexDirection: "row",
-  },
-  DMYInp: {
-    width: 99.7,
-    height: 48,
-    borderWidth: 1,
-    borderColor: "#FFA8C5",
-    borderRadius: 5,
-    paddingLeft: 14,
-    color: "#0B3B63",
-  },
-  dayInpView: {
-    width: 99.7,
-    height: 48,
-    justifyContent: "center",
-    marginRight: 14.95,
-  },
-  monthInpView: {
-    marginRight: 13.65,
   },
   buttonview: {
     marginTop: 30,

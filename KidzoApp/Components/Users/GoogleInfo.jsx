@@ -12,23 +12,12 @@ import { StatusBar } from "expo-status-bar";
 import BackIcon from "../../assets/Profile/Back.png";
 import ImageIcon from "../../assets/Profile/Group69.png";
 
-export default function ProfileSettings({ navigation }) {
+export default function GoogleInfo({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.Section1}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("TabFun");
-            }}
-          >
-            <Image
-              source={BackIcon}
-              style={{ width: 25, height: 25, marginRight: 21.37 }}
-            />
-          </TouchableOpacity>
-
-          <Text style={styles.ProfileTxt}>EDIT PROFILE</Text>
+          <Text style={styles.ProfileTxt}>Complete your data</Text>
         </View>
         <View style={styles.UserImageView}>
           <Image source={ImageIcon} style={{ width: 168, height: 168 }} />
