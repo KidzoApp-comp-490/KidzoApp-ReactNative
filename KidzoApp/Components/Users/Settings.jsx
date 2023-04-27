@@ -40,7 +40,10 @@ export default function Settings({ navigation }) {
         <View style={styles.iconView2}>
           <Image source={Iconset} style={styles.icon2} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("Changepass");
+        }}>
           <Text style={styles.text}>Change your password</Text>
         </TouchableOpacity>
       </View>

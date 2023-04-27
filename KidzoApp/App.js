@@ -26,6 +26,7 @@ import ProfileSettings from "./Components/Users/ProfileSettings";
 import MomsCommunityItem from "./Components/Community/MomsCommunityItem";
 import SignupAs from "./Components/Users/SignupAs";
 import SignUpDoctor from "./Components/Users/SignUpDoctor";
+import Changepass from "./Components/Users/Changepass";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -129,6 +130,11 @@ export default function App() {
         <Stack.Screen
           name="Settings"
           component={Settings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Changepass"
+          component={Changepass}
           options={{ headerShown: false }}
         />
         <Stack.Screen
