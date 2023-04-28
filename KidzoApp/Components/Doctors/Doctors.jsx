@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     backgroundColor: "#FFA8C5",
-    borderRadius: "50%",
+    borderRadius: 100,
     marginRight: 18,
   },
 });

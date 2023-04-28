@@ -31,7 +31,7 @@ export default function Changepass({ navigation }) {
       <View style={styles.frameView}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Settings");
+            navigation.navigate("TabFun");
           }}
         >
           <Image source={Frame} style={styles.frame} />

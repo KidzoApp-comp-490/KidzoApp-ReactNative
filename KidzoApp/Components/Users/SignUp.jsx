@@ -146,7 +146,7 @@ export default function SignUp({ navigation }) {
           </View>
         </View>
         <View style={styles.PassView}>
-          <Text style={styles.inpText}>Password</Text>
+          <Text style={styles.inpPassText}>Password</Text>
           {icon ? (
             <View style={styles.inpPassView}>
               <TextInput
@@ -362,6 +362,14 @@ const styles = StyleSheet.create({
     width: 328,
     height: 48,
     borderRadius: 5,
+  },
+  inpPassText: {
+    fontSize: 14,
+    fontFamily: "Montserrat",
+    color: "#0B3B63A6",
+    fontWeight: "500",
+    opacity: 0.65,
+    marginBottom: 5,
   },
   inputPass: {
     width: 300,
