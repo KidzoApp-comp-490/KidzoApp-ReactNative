@@ -12,9 +12,14 @@ import Frame from "../../assets/MedicalH/Frame.png";
 import Icon from "../../assets/MedicalH/material-symbols_add-circle-outline-rounded.png";
 import Medical from "./Medical";
 import { getMedical, subscribe } from '../../db/medicineReport'
+import { getUserUId } from "../../db/firebase/auth";
 export default function MedicalItem({ navigation }) {
+  let userId;
   const [mediList, setMidList] = useState([]);
-
+  const [currentId, setCurrentId] = useState("");
+  getUserUId().then((val) => {
+    setCurrentId(val);
+  });
   const getmedcList = async () => {
     const medc = await getMedical();
     setMidList(medc);
@@ -80,14 +85,18 @@ export default function MedicalItem({ navigation }) {
             Add new medical reprt{"\n         "}for your child
           </Text>
         </View>
+
         {mediList.map((e, index) => (
-          <Medical
-            text1={e.title}
-            day={e.day}
-            month={e.month}
-            year={e.year}
-            key={index}
-          />
+
+          userId = e.currentUserid,
+          currentId == userId ?
+            <Medical
+              text1={e.title}
+              day={e.day}
+              month={e.month}
+              year={e.year}
+              key={index}
+            /> : null
         ))}
         <View style={{ marginBottom: 50 }}></View>
       </ScrollView>
