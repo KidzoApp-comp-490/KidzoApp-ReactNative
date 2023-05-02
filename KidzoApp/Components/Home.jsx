@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     marginRight: 104,
   },
   Mom: {
-    width: 75,
+    width: 72,
     height: 77,
   },
   WelcomeTxt: {
