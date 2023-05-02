@@ -6,25 +6,49 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import Frame from "../../assets/MedicalH/Frame.png";
 import Icon from "../../assets/MedicalH/material-symbols_add-circle-outline-rounded.png";
 import Medical from "./Medical";
-
+import { getMedical, subscribe } from '../../db/medicineReport'
+import { getUserUId } from "../../db/firebase/auth";
 export default function MedicalItem({ navigation }) {
-  const arrOfObjects = [
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-    { text1: "Cold and flue", day: 10, month: "mar", year: 2023 },
-  ];
+  let userId;
+  const [mediList, setMidList] = useState([]);
+  const [currentId, setCurrentId] = useState("");
+  getUserUId().then((val) => {
+    setCurrentId(val);
+  });
+  const getmedcList = async () => {
+    const medc = await getMedical();
+    setMidList(medc);
+    console.log("medicines from database", medc);
+  }
+  React.useEffect(() => {
+    getmedcList();
+  }, []);
+
+  React.useEffect(() => {
+    const unsubscribe = subscribe(({ change, snapshot }) => {
+      if (change.type === "added") {
+        console.log("New Medicine: ", change.doc.data());
+        getmedcList();
+      }
+      if (change.type === "modified") {
+        console.log("Modified Medicine: ", change.doc.data());
+        getmedcList();
+      }
+      if (change.type === "removed") {
+        console.log("Removed Medicine: ", change.doc.data());
+        getmedcList();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -49,6 +73,7 @@ export default function MedicalItem({ navigation }) {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Report");
+              console.log("nav");
             }}
           >
             <Image source={Icon} style={styles.icon} />
@@ -60,14 +85,18 @@ export default function MedicalItem({ navigation }) {
             Add new medical reprt{"\n         "}for your child
           </Text>
         </View>
-        {arrOfObjects.map((e, index) => (
-          <Medical
-            text1={e.text1}
-            day={e.day}
-            month={e.month}
-            year={e.year}
-            key={index}
-          />
+
+        {mediList.map((e, index) => (
+
+          userId = e.currentUserid,
+          currentId == userId ?
+            <Medical
+              text1={e.title}
+              day={e.day}
+              month={e.month}
+              year={e.year}
+              key={index}
+            /> : null
         ))}
         <View style={{ marginBottom: 50 }}></View>
       </ScrollView>

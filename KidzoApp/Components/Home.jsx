@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,8 +15,26 @@ import Information from "../assets/Home/Info.png";
 import Expert from "../assets/Home/Expert.png";
 import MedicalHistory from "../assets/Home/MedicalHistory.png";
 import { StatusBar } from "expo-status-bar";
+import { getUserUId } from "../db/firebase/auth";
+import { getUserById, subscribe } from "../db/firebase/users";
 
 export default function Home({ navigation }) {
+  const [fName, setFName] = useState("");
+  const [image, setImage] = useState(
+    "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+  );
+  React.useEffect(() => {
+    const unsubscribe = subscribe(({ change, snapshot }) => {
+      getUserUId().then((id) => {
+        console.log(id);
+        getUserById(id).then((user) => {
+          setFName(user[0].fName);
+          setImage(user[0].image);
+        });
+      });
+    });
+  }, []);
+
   return (
     <View style={styles.content}>
       <ScrollView>
@@ -24,14 +42,23 @@ export default function Home({ navigation }) {
           <View style={styles.LogoView}>
             <Image source={Logo} style={styles.Logo} />
           </View>
-          <View style={styles.MomView}>
-            <Image source={Mom} style={styles.Mom} />
+          <View
+            style={{ marginTop: 70, borderRadius: 100, overflow: "hidden" }}
+          >
+            <Image source={{ uri: image }} style={styles.Mom} />
           </View>
         </View>
 
         <View style={styles.body}>
-          <View style={{ marginRight: 206 }}>
-            <Text style={styles.WelcomeTxt}>Welcome, Ann</Text>
+          <View
+            style={{
+              flex: 1,
+              alignSelf: "flex-start",
+            }}
+          >
+            <View style={{ marginLeft: 8 }}>
+              <Text style={styles.WelcomeTxt}>Welcome, {fName}</Text>
+            </View>
           </View>
           <TouchableOpacity style={styles.square}>
             <Image source={Session} style={styles.squareImg} />
@@ -47,7 +74,12 @@ export default function Home({ navigation }) {
           >
             <Image source={Information} style={styles.squareImg} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.square}>
+          <TouchableOpacity
+            style={styles.square}
+            onPress={() => {
+              navigation.navigate("Doctors");
+            }}
+          >
             <Image source={Expert} style={styles.squareImg} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -82,7 +114,6 @@ const styles = StyleSheet.create({
     marginRight: 104,
   },
   Mom: {
-    marginTop: 73,
     width: 75,
     height: 77,
   },
@@ -92,6 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 18,
     fontFamily: "Montserrat",
+    textAlign: "left",
   },
   body: {
     marginHorizontal: 16,

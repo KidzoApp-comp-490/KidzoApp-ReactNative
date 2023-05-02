@@ -21,11 +21,21 @@ import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
 import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignUp({ navigation }) {
-  const [value, setValue] = useState("");
   const SingUpWithGoogle = () => {
     signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
+      navigation.navigate("GoogleInfo");
+      getUserUId().then((id) => {
+        Addusers({
+          uid: id,
+          email: data.user.email,
+          fName: fName,
+          lName: lName,
+          phone: phone,
+          gender: "",
+          age: age,
+          image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+        });
+      });
     });
   };
 
@@ -47,13 +57,23 @@ export default function SignUp({ navigation }) {
       fName.length === 0 &&
       lName.length === 0 &&
       phone.length === 0 &&
-      day.length === 0 &&
-      month.length === 0 &&
-      year.length === 0
+      age.length === 0
     ) {
       alert("invalid information");
+    } else if (email.length === 0) {
+      alert("Please enter your email");
+    } else if (!email.includes("@")) {
+      alert("invalid email");
     } else if (password.length < 8) {
       alert("Password must be at least 8 characters");
+    } else if (fName.length === 0) {
+      alert("Please enter your first name");
+    } else if (lName.length === 0) {
+      alert("Please enter your last name");
+    } else if (phone.length === 0) {
+      alert("Please enter your phone");
+    } else if (age.length === 0) {
+      alert("Please enter your age");
     } else {
       register(email, password)
         .then(() => {
@@ -68,10 +88,9 @@ export default function SignUp({ navigation }) {
               fName: fName,
               lName: lName,
               phone: phone,
-              day: day,
-              month: month,
-              year: year,
               gender: gender,
+              age: age,
+              image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
             });
           });
         })
@@ -227,39 +246,17 @@ export default function SignUp({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={styles.birthdayView}>
-          <Text style={styles.birthdayTxt}>Date of birth</Text>
-          <View style={styles.DMYView}>
-            <View style={styles.dayInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Day"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setDay(val);
-                }}
-              />
-            </View>
-            <View style={styles.monthInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Month"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setMonth(val);
-                }}
-              />
-            </View>
-            <View style={styles.yearInpView}>
-              <TextInput
-                style={styles.DMYInp}
-                placeholder="Year"
-                keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setYear(val);
-                }}
-              />
-            </View>
+
+        <View style={styles.PhoneView}>
+          <Text style={styles.inpText}>Age</Text>
+          <View style={styles.inpView}>
+            <TextInput
+              style={styles.input}
+              keyboardType="number-pad"
+              onChangeText={(val) => {
+                setAge(val);
+              }}
+            />
           </View>
         </View>
         <View style={styles.buttonview}>
@@ -273,14 +270,10 @@ export default function SignUp({ navigation }) {
           <Image source={OR} style={styles.or} />
         </View>
         <View style={styles.SingUpWithGoogleView}>
-          {value ? (
-            navigation.navigate("TabFun")
-          ) : (
-            <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
-              <Image source={Google} style={styles.GoogleIcon} />
-              <Text style={styles.GoogleText}>SingUp with Google</Text>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity style={styles.touch} onPress={SingUpWithGoogle}>
+            <Image source={Google} style={styles.GoogleIcon} />
+            <Text style={styles.GoogleText}>SingUp with Google</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
       <StatusBar style="auto" />

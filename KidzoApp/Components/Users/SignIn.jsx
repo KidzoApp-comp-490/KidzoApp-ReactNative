@@ -19,11 +19,9 @@ import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
 import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
 
 export default function SignIn({ navigation }) {
-  const [value, setValue] = useState("");
   const SingInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
+    signInWithPopup(auth, provider).then(() => {
+      navigation.navigate("TabFun");
     });
   };
 
@@ -144,23 +142,19 @@ export default function SignIn({ navigation }) {
         </View>
 
         <View style={styles.SinginWithGoogleView}>
-          {value ? (
-            navigation.navigate("TabFun")
-          ) : (
-            <TouchableOpacity style={styles.touch} onPress={SingInWithGoogle}>
-              <Image source={Google} style={styles.GoogleIcon} />
-              <View style={styles.GoogleTextView}>
-                <Text style={styles.GoogleText}>Sing in with Google</Text>
-              </View>
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity style={styles.touch} onPress={SingInWithGoogle}>
+            <Image source={Google} style={styles.GoogleIcon} />
+            <View style={styles.GoogleTextView}>
+              <Text style={styles.GoogleText}>Sing in with Google</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.uptextView}>
           <Text style={styles.accountcreate}>
             Don't have an account?
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("SignUp");
+                navigation.navigate("SignupAs");
               }}
             >
               <Text style={styles.uptext}>Sign up</Text>

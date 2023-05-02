@@ -31,6 +31,19 @@ async function SignOut() {
     .catch((error) => {});
 }
 
+async function forgetPass(email) {
+  return sendPasswordResetEmail(auth, email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+}
+
 async function getUserUId() {
   if (auth.currentUser != null) {
     console.log("here", auth.currentUser.uid);
@@ -40,4 +53,4 @@ async function getUserUId() {
   }
 }
 
-export { register, login, SignOut, getUserUId };
+export { register, login, SignOut, getUserUId, forgetPass };
