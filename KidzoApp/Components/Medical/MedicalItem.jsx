@@ -15,6 +15,7 @@ import { getMedical, subscribe } from '../../db/medicineReport'
 import { getUserUId } from "../../db/firebase/auth";
 export default function MedicalItem({ navigation }) {
   let userId;
+  let flagAdd = false;
   const [mediList, setMidList] = useState([]);
   const [currentId, setCurrentId] = useState("");
   getUserUId().then((val) => {
@@ -72,8 +73,10 @@ export default function MedicalItem({ navigation }) {
         <View style={styles.iconView}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Report");
+              flagAdd = true;
+              navigation.navigate("Report", { flagAddVal: flagAdd });
               console.log("nav");
+
             }}
           >
             <Image source={Icon} style={styles.icon} />
@@ -96,7 +99,9 @@ export default function MedicalItem({ navigation }) {
               month={e.month}
               year={e.year}
               key={index}
-            /> : null
+              compId={e.id}
+            />
+            : null
         ))}
         <View style={{ marginBottom: 50 }}></View>
       </ScrollView>

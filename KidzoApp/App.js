@@ -28,7 +28,7 @@ import SignUpDoctor from "./Components/Users/SignUpDoctor";
 import Changepass from "./Components/Users/Changepass";
 import Doctors from "./Components/Doctors/Doctors";
 import ChatWithDoc from "./Components/Chat/ChatWithDoc";
-
+import Medical from "./Components/Medical/Medical"
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -75,6 +75,7 @@ export function TabFun() {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 }
@@ -143,6 +144,7 @@ export default function App() {
           component={TabFun}
           options={{ headerShown: false }}
         />
+        
         <Stack.Screen
           name="ForgetPass"
           component={ForgetPass}
@@ -176,6 +178,11 @@ export default function App() {
         <Stack.Screen
           name="ChatWithDoc"
           component={ChatWithDoc}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="MedicalBage"
+          component={Medical}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
