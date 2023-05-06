@@ -20,7 +20,7 @@ import { signInWithPopup } from "firebase/auth";
 
 export default function SignUpDoctor({ navigation }) {
   const SingUpWithGoogle = () => {
-    signInWithPopup(auth, provider).then((data) => {});
+    signInWithPopup(auth, provider).then((data) => {navigation.navigate("Doctorsettings")});
   };
 
   const [checked, setChecked] = useState("first");

@@ -11,7 +11,8 @@ import {
   Button,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import Iconset from "../../assets/Home/Settings.png";
+import Iconset from "../../assets/Settings/Frame.png";
+import Iconcha from "../../assets/Settings/change.png";
 import { SignOut } from "../../db/firebase/auth";
 
 export default function Settings({ navigation }) {
@@ -23,7 +24,36 @@ export default function Settings({ navigation }) {
       <View style={styles.lineView}>
         <Text style={styles.line}> ────────────────────────────────</Text>
       </View>
-      <View style={styles.textView}>
+
+      <View style={styles.content}>
+      <View style={styles.iconView}>
+          <Image source={Iconset} style={styles.icon} />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("ProfileSettings");
+          }}
+        >
+          <Text style={styles.text1}>Edit your profile</Text>
+        </TouchableOpacity>
+      </View>
+
+
+      <View style={styles.content2}>
+      <View style={styles.iconView2}>
+          <Image source={Iconcha} style={styles.icon2} />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Changepass");
+          }}
+        >
+          <Text style={styles.text1}>Change your password</Text>
+        </TouchableOpacity>
+      </View>
+
+
+      {/* <View style={styles.textView}>
         <View style={styles.iconView}>
           <Image source={Iconset} style={styles.icon} />
         </View>
@@ -34,9 +64,9 @@ export default function Settings({ navigation }) {
         >
           <Text style={styles.text}>Edit your profile</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
-      <View style={styles.textView2}>
+      {/* <View style={styles.textView2}>
         <View style={styles.iconView2}>
           <Image source={Iconset} style={styles.icon2} />
         </View>
@@ -47,12 +77,10 @@ export default function Settings({ navigation }) {
         >
           <Text style={styles.text}>Change your password</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
-      <View style={styles.textView3}>
-        <View style={styles.iconView3}>
-          <Image source={Iconset} style={styles.icon3} />
-        </View>
+      <View style={styles.content3}>
+       
         <TouchableOpacity
           style={styles.square}
           onPress={() => {
@@ -63,7 +91,7 @@ export default function Settings({ navigation }) {
             });
           }}
         >
-          <Text style={styles.text}>Log Out</Text>
+          <Text style={styles.text1}>Log Out</Text>
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
@@ -77,6 +105,56 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffff",
   },
+  content:{
+    width:328,
+    height:48,
+    backgroundColor:"#FFA8C5",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius:5,
+    marginTop: 70,
+    marginRight: 16,
+    marginLeft:16,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  content2:{
+    width:328,
+    height:48,
+    backgroundColor:"#FFA8C5",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius:5,
+    marginTop: 60,
+    marginRight: 16,
+    marginLeft:16,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  content3:{
+    width:328,
+    height:48,
+    backgroundColor:"#FFA8C5",
+    flexDirection: "row",
+    
+    borderRadius:5,
+    marginTop: 60,
+    marginRight: 16,
+    marginLeft:16,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  text1:{
+   textAlign:'center',
+   color: "white",
+   fontFamily: "Montserrat",
+   fontWeight: 700,
+   fontSize: 16,
+    
+
+   
+  },
+
   wordView: {
     marginTop: 77,
     marginRight: 252,

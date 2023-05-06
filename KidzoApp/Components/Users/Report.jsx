@@ -219,6 +219,7 @@ const styles = StyleSheet.create({
     width: 328,
     height: 48,
     borderRadius: 5,
+    paddingLeft:5,
   },
   starView: {
     flexDirection: "row",
@@ -269,6 +270,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontSize: 14,
     opacity: 0.65,
+    
   },
   inp: {
     backgroundColor: "#ffff",
@@ -277,6 +279,7 @@ const styles = StyleSheet.create({
     width: 328,
     height: 144,
     borderRadius: 5,
+    paddingLeft:5,
   },
   iconView: {
     marginTop: 36,

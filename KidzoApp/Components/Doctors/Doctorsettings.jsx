@@ -218,7 +218,9 @@ import {
     Input: {
       width: 326,
       height: 48,
-      borderBottomWidth: 1,
+      marginTop:5,
+    borderWidth: 1,
+      borderWidth: 1,
       borderColor: "#FFA8C5",
     },
     InputView2: {

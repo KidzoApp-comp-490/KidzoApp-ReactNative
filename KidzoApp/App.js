@@ -85,7 +85,7 @@ export function TabFun() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="First">
+      <Stack.Navigator initialRouteName="Settings">
         <Stack.Screen
           name="First"
           component={First}

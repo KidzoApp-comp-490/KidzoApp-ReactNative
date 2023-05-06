@@ -10,8 +10,7 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import Logo from "../../assets/VerficationCode/Logo 2.png";
+
 import Frame from "../../assets/Profile/Back.png";
 
 export default function Expertdetails() {

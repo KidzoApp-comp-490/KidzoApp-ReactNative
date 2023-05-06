@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  Button,
+} from "react-native";
 import OnboardingSlide from './OnboardingSlide';
 
 const slides = [
@@ -46,16 +55,23 @@ const OnboardingFlow = ({ navigation }) => {
         description={slides[activeIndex].description}
       />
       <View style={styles.buttonContainer}>
-        <Button
-          title={activeIndex === slides.length - 1 ? 'Finish' : 'Next'}
+        <TouchableOpacity style={styles.touch}
+          
           onPress={handleNext}
-          color ="#FFA8C5"
-        />
-        <Button
-          title="Skip"
+          
+          >
+            <Text style={styles.skip}>{activeIndex === slides.length - 1 ? 'Finish' : 'Next'}</Text>
+          </TouchableOpacity>
+        
+        
+          
+          <TouchableOpacity style={styles.touch}
           onPress={handleSkip}
-          color ="#FFA8C5"
-        />
+          >
+            <Text style={styles.skip}>Skip</Text>
+          </TouchableOpacity>
+          
+        
       </View>
     </View>
   );
@@ -73,6 +89,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '70%',
     paddingBottom:20,
+  },
+  touch:{
+    width:70,
+    height:35,
+    backgroundColor:"#FFA8C5",
+    alignItems:'center',
+    justifyContent:'center',
+
+  },
+  skip:{
+    color:'white',
   },
 });
 
