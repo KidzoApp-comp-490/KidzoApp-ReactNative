@@ -28,6 +28,9 @@ import SignUpDoctor from "./Components/Users/SignUpDoctor";
 import Changepass from "./Components/Users/Changepass";
 import Doctors from "./Components/Doctors/Doctors";
 import ChatWithDoc from "./Components/Chat/ChatWithDoc";
+import Expertdetails from "./Components/Doctors/Expertdetails";
+import Doctorsettings from "./Components/Doctors/Doctorsettings";
+import OnboardingFlow from "./Components/Users/OnboardingFlow";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -93,6 +96,12 @@ export default function App() {
           component={SignIn}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="OnboardingFlow"
+          component={OnboardingFlow}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="SignupAs"
           component={SignupAs}
@@ -176,6 +185,16 @@ export default function App() {
         <Stack.Screen
           name="ChatWithDoc"
           component={ChatWithDoc}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Expertdetails"
+          component={Expertdetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Doctorsettings"
+          component={Doctorsettings}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -12,7 +12,7 @@ export default function First({ navigation }) {
         toValue: 0,
         duration: 500,
         useNativeDriver: true,
-      }).start(() => navigation.navigate("SignIn"));
+      }).start(() => navigation.navigate("OnboardingFlow"));
     }, 1000);
 
     return () => clearTimeout(timer);
