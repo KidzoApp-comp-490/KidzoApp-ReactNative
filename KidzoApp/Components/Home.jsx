@@ -17,6 +17,8 @@ import MedicalHistory from "../assets/Home/MedicalHistory.png";
 import { StatusBar } from "expo-status-bar";
 import { getUserUId } from "../db/firebase/auth";
 import { getUserById, subscribe } from "../db/firebase/users";
+import { NetworkStatus } from './NetworkStatus';
+
 
 export default function Home({ navigation }) {
   const [fName, setFName] = useState("");
@@ -36,6 +38,7 @@ export default function Home({ navigation }) {
   }, []);
 
   return (
+    <NetworkStatus>
     <View style={styles.content}>
       <ScrollView>
         <View style={styles.header}>
@@ -94,6 +97,7 @@ export default function Home({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

@@ -15,8 +15,11 @@ import Iconset from "../../assets/Settings/Frame.png";
 import Iconcha from "../../assets/Settings/change.png";
 import { SignOut } from "../../db/firebase/auth";
 
+import { NetworkStatus } from "../NetworkStatus";
+
 export default function Settings({ navigation }) {
   return (
+    <NetworkStatus>
     <View style={styles.body}>
       <View style={styles.wordView}>
         <Text style={styles.word}>SETTINGS</Text>
@@ -96,6 +99,7 @@ export default function Settings({ navigation }) {
       </View>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 

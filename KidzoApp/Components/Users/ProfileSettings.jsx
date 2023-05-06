@@ -15,6 +15,7 @@ import { StatusBar } from "expo-status-bar";
 import BackIcon from "../../assets/Profile/Back.png";
 import { firebase } from "../../db/Config";
 import * as ImagePicker from "expo-image-picker";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function ProfileSettings({ navigation }) {
   const [user, setUser] = useState([]);
@@ -97,6 +98,7 @@ export default function ProfileSettings({ navigation }) {
   };
 
   return (
+    <NetworkStatus>
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.Section1}>
@@ -178,6 +180,7 @@ export default function ProfileSettings({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 

@@ -11,12 +11,14 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/SignIn/Kidzo.png";
 import Or from "../../assets/SignIn/OR.png";
+import { NetworkStatus } from '../NetworkStatus';
 
 
 export default function SignupAs({ navigation }) {
  
 
   return (
+    <NetworkStatus>
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.logoView}>
@@ -63,6 +65,7 @@ export default function SignupAs({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

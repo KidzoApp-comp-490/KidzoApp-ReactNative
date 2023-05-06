@@ -19,6 +19,7 @@ import {
   deleteMedicineReport,
   getMedicineReport,
 } from "../../db/medicineReport";
+import { NetworkStatus } from '../NetworkStatus';
 import { getUserUId } from "../../db/firebase/auth";
 export default function Report({ navigation }) {
   const [title, setTitle] = useState("");
@@ -32,6 +33,7 @@ export default function Report({ navigation }) {
   });
 
   return (
+    <NetworkStatus>
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.titleView}>
@@ -161,6 +163,7 @@ export default function Report({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

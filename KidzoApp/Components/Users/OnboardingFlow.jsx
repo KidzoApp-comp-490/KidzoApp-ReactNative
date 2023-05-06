@@ -10,6 +10,7 @@ import {
   Button,
 } from "react-native";
 import OnboardingSlide from './OnboardingSlide';
+import { NetworkStatus } from '../NetworkStatus';
 
 const slides = [
   {
@@ -48,6 +49,7 @@ const OnboardingFlow = ({ navigation }) => {
   };
 
   return (
+    <NetworkStatus>
     <View style={styles.container}>
       <OnboardingSlide
         image={slides[activeIndex].image}
@@ -74,6 +76,7 @@ const OnboardingFlow = ({ navigation }) => {
         
       </View>
     </View>
+    </NetworkStatus>
   );
 };
 

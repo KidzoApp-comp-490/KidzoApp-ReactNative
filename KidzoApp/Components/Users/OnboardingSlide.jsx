@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
+import { NetworkStatus } from '../NetworkStatus';
 
 const OnboardingSlide = ({ image, title, description }) => {
   return (
+    <NetworkStatus>
     <View style={styles.slide}>
       <Image source={image} style={styles.image} />
       <View style={styles.textContainer}>
@@ -10,6 +12,7 @@ const OnboardingSlide = ({ image, title, description }) => {
         <Text style={styles.description}>{description}</Text>
       </View>
     </View>
+    </NetworkStatus>
   );
 };
 
@@ -20,9 +23,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 350,
+    height: 500,
     marginBottom: 20,
+    resizeMode:'contain',
   },
   textContainer: {
     alignItems: 'center',

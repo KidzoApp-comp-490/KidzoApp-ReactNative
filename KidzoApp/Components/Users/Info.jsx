@@ -12,6 +12,7 @@ import {
   Linking,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { NetworkStatus } from '../NetworkStatus';
 
 import Frame from "../../assets/Info/Frame.png";
 import Group58 from "../../assets/Info/Group-58.png";
@@ -21,6 +22,7 @@ import Group61 from "../../assets/Info/Group-61.png";
 
 export default function Info({ navigation }) {
   return (
+    <NetworkStatus>
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.titleView}>
@@ -103,6 +105,7 @@ export default function Info({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

@@ -31,174 +31,179 @@ import ChatWithDoc from "./Components/Chat/ChatWithDoc";
 import Expertdetails from "./Components/Doctors/Expertdetails";
 import Doctorsettings from "./Components/Doctors/Doctorsettings";
 import OnboardingFlow from "./Components/Users/OnboardingFlow";
+import { NetworkStatus } from "./Components/NetworkStatus";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export function TabFun() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: styles.tabBarStyle,
-        headerShown: false,
-        tabBarActiveTintColor: "#FFA8C5",
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: () => <Image style={styles.TabIcon} source={HomeIcon} />,
+    <NetworkStatus>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: styles.tabBarStyle,
+          headerShown: false,
+          tabBarActiveTintColor: "#FFA8C5",
         }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: () => (
-            <Image style={styles.TabIcon} source={ProfileIcon} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="MoMS"
-        component={MomsCommunityItem}
-        options={{
-          tabBarIcon: () => (
-            <Image style={styles.TabIcon} source={CommunityIcon} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          tabBarIcon: () => (
-            <Image style={styles.TabIcon} source={SettingIcon} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: () => <Image style={styles.TabIcon} source={HomeIcon} />,
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: () => (
+              <Image style={styles.TabIcon} source={ProfileIcon} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="MoMS"
+          component={MomsCommunityItem}
+          options={{
+            tabBarIcon: () => (
+              <Image style={styles.TabIcon} source={CommunityIcon} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            tabBarIcon: () => (
+              <Image style={styles.TabIcon} source={SettingIcon} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NetworkStatus>
   );
 }
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Settings">
-        <Stack.Screen
-          name="First"
-          component={First}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="OnboardingFlow"
-          component={OnboardingFlow}
-          options={{ headerShown: false }}
-        />
+    <NetworkStatus>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="First">
+          <Stack.Screen
+            name="First"
+            component={First}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="OnboardingFlow"
+            component={OnboardingFlow}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="SignupAs"
-          component={SignupAs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUpDoctor"
-          component={SignUpDoctor}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Medical"
-          component={MedicalItem}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Info"
-          component={Info}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Report"
-          component={Report}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={Settings}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="GoogleInfo"
-          component={GoogleInfo}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="TabFun"
-          component={TabFun}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ForgetPass"
-          component={ForgetPass}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Confirm"
-          component={Confirm}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ResetPass"
-          component={ResetPass}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ProfileSettings"
-          component={ProfileSettings}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Changepass"
-          component={Changepass}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Doctors"
-          component={Doctors}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ChatWithDoc"
-          component={ChatWithDoc}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Expertdetails"
-          component={Expertdetails}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Doctorsettings"
-          component={Doctorsettings}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="SignupAs"
+            component={SignupAs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignUpDoctor"
+            component={SignUpDoctor}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Medical"
+            component={MedicalItem}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Info"
+            component={Info}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Report"
+            component={Report}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="GoogleInfo"
+            component={GoogleInfo}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TabFun"
+            component={TabFun}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ForgetPass"
+            component={ForgetPass}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Confirm"
+            component={Confirm}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ResetPass"
+            component={ResetPass}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ProfileSettings"
+            component={ProfileSettings}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Changepass"
+            component={Changepass}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Doctors"
+            component={Doctors}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChatWithDoc"
+            component={ChatWithDoc}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Expertdetails"
+            component={Expertdetails}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Doctorsettings"
+            component={Doctorsettings}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </NetworkStatus>
   );
 }
 

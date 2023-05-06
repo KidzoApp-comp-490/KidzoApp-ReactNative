@@ -13,9 +13,11 @@ import {
 import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/VerficationCode/Logo 2.png";
 import Frame from "../../assets/VerficationCode/Frame.png";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function Confirm({ navigation }) {
   return (
+    <NetworkStatus>
     <View style={styles.container}>
       <View style={styles.logoView}>
         <Image source={Logo} style={styles.logo} />
@@ -53,6 +55,7 @@ export default function Confirm({ navigation }) {
       </View>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

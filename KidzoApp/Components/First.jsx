@@ -2,8 +2,10 @@ import { View, Text, Image, StyleSheet, Animated } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/Intro/Logo2.png";
+import { NetworkStatus } from './NetworkStatus';
 
 export default function First({ navigation }) {
+
   const opacity = new Animated.Value(1);
 
   useEffect(() => {
@@ -18,6 +20,7 @@ export default function First({ navigation }) {
     return () => clearTimeout(timer);
   }, []);
   return (
+    <NetworkStatus>
     <Animated.View
       style={{
         flex: 1,
@@ -29,6 +32,7 @@ export default function First({ navigation }) {
       </View>
       <StatusBar style="auto" />
     </Animated.View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({
