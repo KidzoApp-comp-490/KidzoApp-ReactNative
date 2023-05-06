@@ -21,6 +21,7 @@ import {
   subscribe
 
 } from "../../db/medicineReport";
+import { NetworkStatus } from '../NetworkStatus';
 import { getUserUId } from "../../db/firebase/auth";
 import * as ImagePicker from "expo-image-picker";
 export default function Report({ navigation, route }) {
@@ -98,6 +99,7 @@ export default function Report({ navigation, route }) {
 
   }, []);
   return (
+    <NetworkStatus>
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.titleView}>
@@ -348,6 +350,7 @@ export default function Report({ navigation, route }) {
 
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({
@@ -406,6 +409,7 @@ const styles = StyleSheet.create({
     width: 328,
     height: 48,
     borderRadius: 5,
+    paddingLeft:5,
   },
   starView: {
     flexDirection: "row",
@@ -456,6 +460,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontSize: 14,
     opacity: 0.65,
+    
   },
   inp: {
     backgroundColor: "#ffff",
@@ -464,6 +469,7 @@ const styles = StyleSheet.create({
     width: 328,
     height: 144,
     borderRadius: 5,
+    paddingLeft:5,
   },
   iconView: {
     marginTop: 36,

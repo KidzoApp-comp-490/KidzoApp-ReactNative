@@ -14,10 +14,12 @@ import { StatusBar } from "expo-status-bar";
 import Logo from "../../assets/ForgotPass/Logo 2.png";
 import Frame from "../../assets/ForgotPass/Frame.png";
 import { forgetPass } from "../../db/firebase/auth";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function Forget({ navigation }) {
   const [email, setEmail] = useState("");
   return (
+    <NetworkStatus>
     <View style={styles.container}>
       <View style={styles.logoView}>
         <Image source={Logo} style={styles.logo} />
@@ -58,6 +60,7 @@ export default function Forget({ navigation }) {
       </View>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

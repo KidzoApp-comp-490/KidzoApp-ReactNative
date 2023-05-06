@@ -15,6 +15,7 @@ import Logo from "../../assets/ForgotPass/Logo 2.png";
 import Frame from "../../assets/ForgotPass/Frame.png";
 import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
 import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function Changepass({ navigation }) {
   const [icon, setIcon] = useState(true);
@@ -24,6 +25,7 @@ export default function Changepass({ navigation }) {
   let imageSource = icon ? PassIconInV : PassIconV;
 
   return (
+    <NetworkStatus>
     <View style={styles.container}>
       <View style={styles.logoView}>
         <Image source={Logo} style={styles.logo} />
@@ -121,6 +123,7 @@ export default function Changepass({ navigation }) {
       </View>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({

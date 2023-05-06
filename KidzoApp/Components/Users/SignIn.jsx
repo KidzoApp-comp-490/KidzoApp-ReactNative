@@ -17,6 +17,7 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../db/Config";
 import PassIconV from "../../assets/SignIn/fluent_eye-24-regular.png";
 import PassIconInV from "../../assets/SignIn/fluent_eye-off-16-regular.png";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function SignIn({ navigation }) {
   const SingInWithGoogle = () => {
@@ -69,6 +70,8 @@ export default function SignIn({ navigation }) {
   let imageSource = icon ? PassIconInV : PassIconV;
 
   return (
+    
+    <NetworkStatus >
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.logoView}>
@@ -164,6 +167,8 @@ export default function SignIn({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
+    
   );
 }
 const styles = StyleSheet.create({
@@ -256,6 +261,8 @@ const styles = StyleSheet.create({
     height: 48,
     backgroundColor: "#FFA8C5",
     color: "#ffff",
+    
+
   },
   button1: {
     fontFamily: "Montserrat",

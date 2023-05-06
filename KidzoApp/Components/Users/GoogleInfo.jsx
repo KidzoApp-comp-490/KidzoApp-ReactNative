@@ -15,6 +15,7 @@ import { StatusBar } from "expo-status-bar";
 import { firebase } from "../../db/Config";
 import * as ImagePicker from "expo-image-picker";
 import { RadioButton } from "react-native-paper";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function GoogleInfo({ navigation }) {
   const [user, setUser] = useState([]);
@@ -106,6 +107,7 @@ export default function GoogleInfo({ navigation }) {
     }
   };
   return (
+    <NetworkStatus>
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.Section1}>
@@ -187,6 +189,7 @@ export default function GoogleInfo({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 

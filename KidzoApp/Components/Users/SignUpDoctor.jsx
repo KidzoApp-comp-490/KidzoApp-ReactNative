@@ -17,10 +17,11 @@ import { register, getUserUId } from "../../db/firebase/auth";
 import { auth, provider } from "../../db/Config";
 import { Addusers } from "../../db/firebase/users";
 import { signInWithPopup } from "firebase/auth";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function SignUpDoctor({ navigation }) {
   const SingUpWithGoogle = () => {
-    signInWithPopup(auth, provider).then((data) => {});
+    signInWithPopup(auth, provider).then((data) => {navigation.navigate("Doctorsettings")});
   };
 
   const [checked, setChecked] = useState("first");
@@ -75,6 +76,7 @@ export default function SignUpDoctor({ navigation }) {
   };
 
   return (
+    <NetworkStatus>
     <View style={styles.body}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
         <View style={styles.LogoView}>
@@ -195,6 +197,7 @@ export default function SignUpDoctor({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 const styles = StyleSheet.create({
