@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet,ImageBackground } from 'react-native';
-import NetInfo from '@react-native-community/netinfo';
+import React, { useState, useEffect } from "react";
+import { View, Image, Text, StyleSheet, ImageBackground } from "react-native";
+import NetInfo from "@react-native-community/netinfo";
 
 const NoInternetImage = () => (
   <View style={styles.container}>
-     <ImageBackground
-      source={require('../assets/Lossconnection/Loss.png')}
+    <ImageBackground
+      source={require("../assets/Lossconnection/Loss.png")}
       style={styles.image}
-    >
-      <Text style={styles.text}>No internet connection</Text>
-      
-    </ImageBackground>
+    ></ImageBackground>
   </View>
 );
 
@@ -18,7 +15,7 @@ export const NetworkStatus = ({ children }) => {
   const [isConnected, setIsConnected] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
       setIsConnected(state.isConnected);
     });
 
@@ -29,11 +26,7 @@ export const NetworkStatus = ({ children }) => {
 
   return (
     <View style={styles.wrapper}>
-      {isConnected ? (
-        children
-      ) : (
-        <NoInternetImage />
-      )}
+      {isConnected ? children : <NoInternetImage />}
     </View>
   );
 };
@@ -44,8 +37,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     width: 200,
@@ -53,7 +46,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 20,
   },
 });
