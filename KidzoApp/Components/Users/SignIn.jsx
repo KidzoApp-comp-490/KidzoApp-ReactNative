@@ -35,7 +35,7 @@ export default function SignIn({ navigation }) {
       login(email, password)
         .then(() => {
           navigation.navigate("TabFun");
-          alert("Login Success!");
+
         })
         .catch((e) => {
           if (

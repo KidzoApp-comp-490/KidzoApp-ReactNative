@@ -6,14 +6,17 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  Button
 } from "react-native";
 import React from "react";
 import MomsCommunity from "./MomsCommunity";
 import PostIcon from "../../assets/Profile/image3.png";
 import ImageIcon from "../../assets/Community/ant-design_picture-outlined.png";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MomsCommunityItem() {
+  const navigation = useNavigation();
   const arrOfObjects = [
     { text: "Post1", icon: PostIcon },
     { text: "Post2", icon: PostIcon },
@@ -27,6 +30,12 @@ export default function MomsCommunityItem() {
         }}
       >
         <Text style={styles.CommunityTxt}>Moms Community</Text>
+        <View>
+          <Button
+            title="Go to Details"
+            onPress={() => navigation.navigate('CreatePost')}
+          />
+        </View>
         <View style={styles.InpView}>
           <TextInput
             style={styles.Inp}

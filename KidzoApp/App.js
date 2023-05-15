@@ -28,7 +28,7 @@ import SignUpDoctor from "./Components/Users/SignUpDoctor";
 import Changepass from "./Components/Users/Changepass";
 import Doctors from "./Components/Doctors/Doctors";
 import ChatWithDoc from "./Components/Chat/ChatWithDoc";
-
+import MomsComCreatepost from "./Components/Community/MomsComCreatepost";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -124,6 +124,11 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="MomsCommunityItem"
+          component={MomsCommunityItem}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Report"
           component={Report}
           options={{ headerShown: false }}
@@ -177,6 +182,11 @@ export default function App() {
           name="ChatWithDoc"
           component={ChatWithDoc}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CreatePost"
+          component={MomsComCreatepost}
+          options={{ headerShown: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>
