@@ -16,6 +16,7 @@ import PostIcon from "../../assets/Profile/image3.png";
 import Heart from "../../assets/Profile/Group.png";
 import Comment from "../../assets/Profile/comment.png";
 import { StatusBar } from "expo-status-bar";
+import { NetworkStatus } from '../NetworkStatus';
 
 export default function Profile({ navigation }) {
   const [firstname, SetFName] = useState("");
@@ -34,6 +35,7 @@ export default function Profile({ navigation }) {
     });
   }, []);
   return (
+    <NetworkStatus>
     <View style={{ flex: 1 }}>
       <ScrollView
         contentContainerStyle={{ alignItems: "center", marginBottom: 80 }}
@@ -82,6 +84,7 @@ export default function Profile({ navigation }) {
       </ScrollView>
       <StatusBar style="auto" />
     </View>
+    </NetworkStatus>
   );
 }
 

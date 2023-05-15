@@ -28,54 +28,61 @@ import SignUpDoctor from "./Components/Users/SignUpDoctor";
 import Changepass from "./Components/Users/Changepass";
 import Doctors from "./Components/Doctors/Doctors";
 import ChatWithDoc from "./Components/Chat/ChatWithDoc";
+import Expertdetails from "./Components/Doctors/Expertdetails";
+import Doctorsettings from "./Components/Doctors/Doctorsettings";
+import OnboardingFlow from "./Components/Users/OnboardingFlow";
+import { NetworkStatus } from "./Components/NetworkStatus";
+import Medical from "./Components/Medical/Medical"
 import MomsComCreatepost from "./Components/Community/MomsComCreatepost";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export function TabFun() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarStyle: styles.tabBarStyle,
-        headerShown: false,
-        tabBarActiveTintColor: "#FFA8C5",
-      }}
-    >
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: () => <Image style={styles.TabIcon} source={HomeIcon} />,
+    <NetworkStatus>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: styles.tabBarStyle,
+          headerShown: false,
+          tabBarActiveTintColor: "#FFA8C5",
         }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: () => (
-            <Image style={styles.TabIcon} source={ProfileIcon} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="MoMS"
-        component={MomsCommunityItem}
-        options={{
-          tabBarIcon: () => (
-            <Image style={styles.TabIcon} source={CommunityIcon} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          tabBarIcon: () => (
-            <Image style={styles.TabIcon} source={SettingIcon} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: () => <Image style={styles.TabIcon} source={HomeIcon} />,
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: () => (
+              <Image style={styles.TabIcon} source={ProfileIcon} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="MoMS"
+          component={MomsCommunityItem}
+          options={{
+            tabBarIcon: () => (
+              <Image style={styles.TabIcon} source={CommunityIcon} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            tabBarIcon: () => (
+              <Image style={styles.TabIcon} source={SettingIcon} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NetworkStatus>
   );
 }
 
@@ -121,11 +128,6 @@ export default function App() {
         <Stack.Screen
           name="Info"
           component={Info}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="MomsCommunityItem"
-          component={MomsCommunityItem}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -182,11 +184,6 @@ export default function App() {
           name="ChatWithDoc"
           component={ChatWithDoc}
           options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="CreatePost"
-          component={MomsComCreatepost}
-          options={{ headerShown: true }}
         />
       </Stack.Navigator>
     </NavigationContainer>

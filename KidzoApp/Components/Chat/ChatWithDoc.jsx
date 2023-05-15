@@ -16,7 +16,7 @@ import Send from "../../assets/Chat/ic_round-send.png";
 import * as ImagePicker from "expo-image-picker";
 import { firebase } from "../../db/Config";
 
-export default function ChatWithDoc() {
+export default function ChatWithDoc({ navigation }) {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
   const [image, setImage] = useState(null);
@@ -82,10 +82,15 @@ export default function ChatWithDoc() {
       <View style={{ alignItems: "center" }}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
+            <TouchableOpacity
+             onPress={() => {
+              navigation.navigate("Doctors");
+            }}>
             <Image
               source={Back}
               style={{ width: 25, height: 14.25, marginRight: 38.37 }}
             />
+            </TouchableOpacity>
             <Image
               source={ProfilePic}
               style={{ width: 75, height: 75, marginRight: 32 }}
@@ -116,6 +121,7 @@ export default function ChatWithDoc() {
               <Image
                 source={image ? image : Img}
                 style={{ width: 24, height: 24, marginLeft: 15 }}
+              
               />
             )}
           </TouchableOpacity>
